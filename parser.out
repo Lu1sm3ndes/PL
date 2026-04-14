@@ -1,0 +1,3889 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COLON
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> bloco_principal lista_subprogramas
+Rule 2     programa -> bloco_principal
+Rule 3     bloco_principal -> cabecalho declaracoes instrucoes END
+Rule 4     bloco_principal -> cabecalho instrucoes END
+Rule 5     lista_subprogramas -> lista_subprogramas subprograma
+Rule 6     lista_subprogramas -> subprograma
+Rule 7     subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+Rule 8     subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+Rule 9     subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+Rule 10    cabecalho -> PROGRAM IDEN
+Rule 11    declaracoes -> declaracoes declaracao
+Rule 12    declaracoes -> declaracao
+Rule 13    declaracao -> INTEGER lista_ids
+Rule 14    declaracao -> REAL lista_ids
+Rule 15    declaracao -> LOGICAL lista_ids
+Rule 16    lista_ids -> lista_ids COMMA IDEN
+Rule 17    lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN
+Rule 18    lista_ids -> IDEN
+Rule 19    lista_ids -> IDEN LPAREN INT RPAREN
+Rule 20    lista_ids_simples -> lista_ids_simples COMMA IDEN
+Rule 21    lista_ids_simples -> IDEN
+Rule 22    instrucoes -> instrucoes instrucao_com_label
+Rule 23    instrucoes -> instrucao_com_label
+Rule 24    instrucao_com_label -> INT instrucao
+Rule 25    instrucao_com_label -> instrucao
+Rule 26    instrucao -> PRINT MUL COMMA lista_print
+Rule 27    lista_print -> lista_print COMMA elemento_print
+Rule 28    lista_print -> elemento_print
+Rule 29    elemento_print -> STRING
+Rule 30    elemento_print -> expr
+Rule 31    instrucao -> READ MUL COMMA lista_ids_simples
+Rule 32    instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN
+Rule 33    instrucao -> IDEN ASSIGN expr
+Rule 34    instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr
+Rule 35    instrucao -> DO INT IDEN ASSIGN expr COMMA expr
+Rule 36    instrucao -> CONTINUE
+Rule 37    instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF
+Rule 38    instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+Rule 39    instrucao -> GOTO INT
+Rule 40    instrucao -> RETURN
+Rule 41    expr -> expr ADD expr
+Rule 42    expr -> expr SUB expr
+Rule 43    expr -> expr MUL expr
+Rule 44    expr -> expr DIV expr
+Rule 45    expr -> expr EQ expr
+Rule 46    expr -> expr NE expr
+Rule 47    expr -> expr LT expr
+Rule 48    expr -> expr LE expr
+Rule 49    expr -> expr GT expr
+Rule 50    expr -> expr GE expr
+Rule 51    expr -> expr AND expr
+Rule 52    expr -> expr OR expr
+Rule 53    expr -> NOT expr
+Rule 54    expr -> LPAREN expr RPAREN
+Rule 55    expr -> TRUE
+Rule 56    expr -> FALSE
+Rule 57    expr -> IDEN LPAREN lista_expr RPAREN
+Rule 58    lista_expr -> lista_expr COMMA expr
+Rule 59    lista_expr -> expr
+Rule 60    expr -> INT
+Rule 61    expr -> REAL_NUM
+Rule 62    expr -> IDEN
+
+Terminals, with rules where they appear
+
+ADD                  : 41
+AND                  : 51
+ASSIGN               : 33 34 35
+COLON                : 
+COMMA                : 16 17 20 26 27 31 32 35 58
+CONTINUE             : 36
+DIV                  : 44
+DO                   : 35
+ELSE                 : 38
+END                  : 3 4 7 8 9
+ENDIF                : 37 38
+EQ                   : 45
+FALSE                : 56
+FUNCTION             : 7 8
+GE                   : 50
+GOTO                 : 39
+GT                   : 49
+IDEN                 : 7 8 9 10 16 17 18 19 20 21 32 33 34 35 57 62
+IF                   : 37 38
+INT                  : 17 19 24 35 39 60
+INTEGER              : 7 13
+LE                   : 48
+LOGICAL              : 15
+LPAREN               : 7 8 9 17 19 32 34 37 38 54 57
+LT                   : 47
+MUL                  : 26 31 32 43
+NE                   : 46
+NOT                  : 53
+OR                   : 52
+PRINT                : 26
+PROGRAM              : 10
+READ                 : 31 32
+REAL                 : 8 14
+REAL_NUM             : 61
+RETURN               : 40
+RPAREN               : 7 8 9 17 19 32 34 37 38 54 57
+STRING               : 29
+SUB                  : 42
+SUBROUTINE           : 9
+THEN                 : 37 38
+TRUE                 : 55
+error                : 
+
+Nonterminals, with rules where they appear
+
+bloco_principal      : 1 2
+cabecalho            : 3 4
+declaracao           : 11 12
+declaracoes          : 3 7 8 9 11
+elemento_print       : 27 28
+expr                 : 30 32 33 34 34 35 35 37 38 41 41 42 42 43 43 44 44 45 45 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 54 58 59
+instrucao            : 24 25
+instrucao_com_label  : 22 23
+instrucoes           : 3 4 7 8 9 22 37 38 38
+lista_expr           : 57 58
+lista_ids            : 13 14 15 16 17
+lista_ids_simples    : 7 8 9 20 31
+lista_print          : 26 27
+lista_subprogramas   : 1 5
+programa             : 0
+subprograma          : 5 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . bloco_principal lista_subprogramas
+    (2) programa -> . bloco_principal
+    (3) bloco_principal -> . cabecalho declaracoes instrucoes END
+    (4) bloco_principal -> . cabecalho instrucoes END
+    (10) cabecalho -> . PROGRAM IDEN
+
+    PROGRAM         shift and go to state 4
+
+    programa                       shift and go to state 1
+    bloco_principal                shift and go to state 2
+    cabecalho                      shift and go to state 3
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> bloco_principal . lista_subprogramas
+    (2) programa -> bloco_principal .
+    (5) lista_subprogramas -> . lista_subprogramas subprograma
+    (6) lista_subprogramas -> . subprograma
+    (7) subprograma -> . INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+    (8) subprograma -> . REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+    (9) subprograma -> . SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    $end            reduce using rule 2 (programa -> bloco_principal .)
+    INTEGER         shift and go to state 7
+    REAL            shift and go to state 8
+    SUBROUTINE      shift and go to state 9
+
+    lista_subprogramas             shift and go to state 5
+    subprograma                    shift and go to state 6
+
+state 3
+
+    (3) bloco_principal -> cabecalho . declaracoes instrucoes END
+    (4) bloco_principal -> cabecalho . instrucoes END
+    (11) declaracoes -> . declaracoes declaracao
+    (12) declaracoes -> . declaracao
+    (22) instrucoes -> . instrucoes instrucao_com_label
+    (23) instrucoes -> . instrucao_com_label
+    (13) declaracao -> . INTEGER lista_ids
+    (14) declaracao -> . REAL lista_ids
+    (15) declaracao -> . LOGICAL lista_ids
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    INTEGER         shift and go to state 14
+    REAL            shift and go to state 15
+    LOGICAL         shift and go to state 16
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    declaracoes                    shift and go to state 10
+    instrucoes                     shift and go to state 11
+    declaracao                     shift and go to state 12
+    instrucao_com_label            shift and go to state 13
+    instrucao                      shift and go to state 18
+
+state 4
+
+    (10) cabecalho -> PROGRAM . IDEN
+
+    IDEN            shift and go to state 27
+
+
+state 5
+
+    (1) programa -> bloco_principal lista_subprogramas .
+    (5) lista_subprogramas -> lista_subprogramas . subprograma
+    (7) subprograma -> . INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+    (8) subprograma -> . REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+    (9) subprograma -> . SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    $end            reduce using rule 1 (programa -> bloco_principal lista_subprogramas .)
+    INTEGER         shift and go to state 7
+    REAL            shift and go to state 8
+    SUBROUTINE      shift and go to state 9
+
+    subprograma                    shift and go to state 28
+
+state 6
+
+    (6) lista_subprogramas -> subprograma .
+
+    INTEGER         reduce using rule 6 (lista_subprogramas -> subprograma .)
+    REAL            reduce using rule 6 (lista_subprogramas -> subprograma .)
+    SUBROUTINE      reduce using rule 6 (lista_subprogramas -> subprograma .)
+    $end            reduce using rule 6 (lista_subprogramas -> subprograma .)
+
+
+state 7
+
+    (7) subprograma -> INTEGER . FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    FUNCTION        shift and go to state 29
+
+
+state 8
+
+    (8) subprograma -> REAL . FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    FUNCTION        shift and go to state 30
+
+
+state 9
+
+    (9) subprograma -> SUBROUTINE . IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    IDEN            shift and go to state 31
+
+
+state 10
+
+    (3) bloco_principal -> cabecalho declaracoes . instrucoes END
+    (11) declaracoes -> declaracoes . declaracao
+    (22) instrucoes -> . instrucoes instrucao_com_label
+    (23) instrucoes -> . instrucao_com_label
+    (13) declaracao -> . INTEGER lista_ids
+    (14) declaracao -> . REAL lista_ids
+    (15) declaracao -> . LOGICAL lista_ids
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    INTEGER         shift and go to state 14
+    REAL            shift and go to state 15
+    LOGICAL         shift and go to state 16
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucoes                     shift and go to state 32
+    declaracao                     shift and go to state 33
+    instrucao_com_label            shift and go to state 13
+    instrucao                      shift and go to state 18
+
+state 11
+
+    (4) bloco_principal -> cabecalho instrucoes . END
+    (22) instrucoes -> instrucoes . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    END             shift and go to state 34
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucao_com_label            shift and go to state 35
+    instrucao                      shift and go to state 18
+
+state 12
+
+    (12) declaracoes -> declaracao .
+
+    INTEGER         reduce using rule 12 (declaracoes -> declaracao .)
+    REAL            reduce using rule 12 (declaracoes -> declaracao .)
+    LOGICAL         reduce using rule 12 (declaracoes -> declaracao .)
+    INT             reduce using rule 12 (declaracoes -> declaracao .)
+    PRINT           reduce using rule 12 (declaracoes -> declaracao .)
+    READ            reduce using rule 12 (declaracoes -> declaracao .)
+    IDEN            reduce using rule 12 (declaracoes -> declaracao .)
+    DO              reduce using rule 12 (declaracoes -> declaracao .)
+    CONTINUE        reduce using rule 12 (declaracoes -> declaracao .)
+    IF              reduce using rule 12 (declaracoes -> declaracao .)
+    GOTO            reduce using rule 12 (declaracoes -> declaracao .)
+    RETURN          reduce using rule 12 (declaracoes -> declaracao .)
+
+
+state 13
+
+    (23) instrucoes -> instrucao_com_label .
+
+    END             reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    INT             reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    PRINT           reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    READ            reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    IDEN            reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    DO              reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    CONTINUE        reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    IF              reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    GOTO            reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    RETURN          reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    ENDIF           reduce using rule 23 (instrucoes -> instrucao_com_label .)
+    ELSE            reduce using rule 23 (instrucoes -> instrucao_com_label .)
+
+
+state 14
+
+    (13) declaracao -> INTEGER . lista_ids
+    (16) lista_ids -> . lista_ids COMMA IDEN
+    (17) lista_ids -> . lista_ids COMMA IDEN LPAREN INT RPAREN
+    (18) lista_ids -> . IDEN
+    (19) lista_ids -> . IDEN LPAREN INT RPAREN
+
+    IDEN            shift and go to state 37
+
+    lista_ids                      shift and go to state 36
+
+state 15
+
+    (14) declaracao -> REAL . lista_ids
+    (16) lista_ids -> . lista_ids COMMA IDEN
+    (17) lista_ids -> . lista_ids COMMA IDEN LPAREN INT RPAREN
+    (18) lista_ids -> . IDEN
+    (19) lista_ids -> . IDEN LPAREN INT RPAREN
+
+    IDEN            shift and go to state 37
+
+    lista_ids                      shift and go to state 38
+
+state 16
+
+    (15) declaracao -> LOGICAL . lista_ids
+    (16) lista_ids -> . lista_ids COMMA IDEN
+    (17) lista_ids -> . lista_ids COMMA IDEN LPAREN INT RPAREN
+    (18) lista_ids -> . IDEN
+    (19) lista_ids -> . IDEN LPAREN INT RPAREN
+
+    IDEN            shift and go to state 37
+
+    lista_ids                      shift and go to state 39
+
+state 17
+
+    (24) instrucao_com_label -> INT . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucao                      shift and go to state 40
+
+state 18
+
+    (25) instrucao_com_label -> instrucao .
+
+    END             reduce using rule 25 (instrucao_com_label -> instrucao .)
+    INT             reduce using rule 25 (instrucao_com_label -> instrucao .)
+    PRINT           reduce using rule 25 (instrucao_com_label -> instrucao .)
+    READ            reduce using rule 25 (instrucao_com_label -> instrucao .)
+    IDEN            reduce using rule 25 (instrucao_com_label -> instrucao .)
+    DO              reduce using rule 25 (instrucao_com_label -> instrucao .)
+    CONTINUE        reduce using rule 25 (instrucao_com_label -> instrucao .)
+    IF              reduce using rule 25 (instrucao_com_label -> instrucao .)
+    GOTO            reduce using rule 25 (instrucao_com_label -> instrucao .)
+    RETURN          reduce using rule 25 (instrucao_com_label -> instrucao .)
+    ENDIF           reduce using rule 25 (instrucao_com_label -> instrucao .)
+    ELSE            reduce using rule 25 (instrucao_com_label -> instrucao .)
+
+
+state 19
+
+    (26) instrucao -> PRINT . MUL COMMA lista_print
+
+    MUL             shift and go to state 41
+
+
+state 20
+
+    (31) instrucao -> READ . MUL COMMA lista_ids_simples
+    (32) instrucao -> READ . MUL COMMA IDEN LPAREN expr RPAREN
+
+    MUL             shift and go to state 42
+
+
+state 21
+
+    (33) instrucao -> IDEN . ASSIGN expr
+    (34) instrucao -> IDEN . LPAREN expr RPAREN ASSIGN expr
+
+    ASSIGN          shift and go to state 43
+    LPAREN          shift and go to state 44
+
+
+state 22
+
+    (35) instrucao -> DO . INT IDEN ASSIGN expr COMMA expr
+
+    INT             shift and go to state 45
+
+
+state 23
+
+    (36) instrucao -> CONTINUE .
+
+    END             reduce using rule 36 (instrucao -> CONTINUE .)
+    INT             reduce using rule 36 (instrucao -> CONTINUE .)
+    PRINT           reduce using rule 36 (instrucao -> CONTINUE .)
+    READ            reduce using rule 36 (instrucao -> CONTINUE .)
+    IDEN            reduce using rule 36 (instrucao -> CONTINUE .)
+    DO              reduce using rule 36 (instrucao -> CONTINUE .)
+    CONTINUE        reduce using rule 36 (instrucao -> CONTINUE .)
+    IF              reduce using rule 36 (instrucao -> CONTINUE .)
+    GOTO            reduce using rule 36 (instrucao -> CONTINUE .)
+    RETURN          reduce using rule 36 (instrucao -> CONTINUE .)
+    ENDIF           reduce using rule 36 (instrucao -> CONTINUE .)
+    ELSE            reduce using rule 36 (instrucao -> CONTINUE .)
+
+
+state 24
+
+    (37) instrucao -> IF . LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> IF . LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+
+    LPAREN          shift and go to state 46
+
+
+state 25
+
+    (39) instrucao -> GOTO . INT
+
+    INT             shift and go to state 47
+
+
+state 26
+
+    (40) instrucao -> RETURN .
+
+    END             reduce using rule 40 (instrucao -> RETURN .)
+    INT             reduce using rule 40 (instrucao -> RETURN .)
+    PRINT           reduce using rule 40 (instrucao -> RETURN .)
+    READ            reduce using rule 40 (instrucao -> RETURN .)
+    IDEN            reduce using rule 40 (instrucao -> RETURN .)
+    DO              reduce using rule 40 (instrucao -> RETURN .)
+    CONTINUE        reduce using rule 40 (instrucao -> RETURN .)
+    IF              reduce using rule 40 (instrucao -> RETURN .)
+    GOTO            reduce using rule 40 (instrucao -> RETURN .)
+    RETURN          reduce using rule 40 (instrucao -> RETURN .)
+    ENDIF           reduce using rule 40 (instrucao -> RETURN .)
+    ELSE            reduce using rule 40 (instrucao -> RETURN .)
+
+
+state 27
+
+    (10) cabecalho -> PROGRAM IDEN .
+
+    INTEGER         reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    REAL            reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    LOGICAL         reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    INT             reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    PRINT           reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    READ            reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    IDEN            reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    DO              reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    CONTINUE        reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    IF              reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    GOTO            reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+    RETURN          reduce using rule 10 (cabecalho -> PROGRAM IDEN .)
+
+
+state 28
+
+    (5) lista_subprogramas -> lista_subprogramas subprograma .
+
+    INTEGER         reduce using rule 5 (lista_subprogramas -> lista_subprogramas subprograma .)
+    REAL            reduce using rule 5 (lista_subprogramas -> lista_subprogramas subprograma .)
+    SUBROUTINE      reduce using rule 5 (lista_subprogramas -> lista_subprogramas subprograma .)
+    $end            reduce using rule 5 (lista_subprogramas -> lista_subprogramas subprograma .)
+
+
+state 29
+
+    (7) subprograma -> INTEGER FUNCTION . IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    IDEN            shift and go to state 48
+
+
+state 30
+
+    (8) subprograma -> REAL FUNCTION . IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    IDEN            shift and go to state 49
+
+
+state 31
+
+    (9) subprograma -> SUBROUTINE IDEN . LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    LPAREN          shift and go to state 50
+
+
+state 32
+
+    (3) bloco_principal -> cabecalho declaracoes instrucoes . END
+    (22) instrucoes -> instrucoes . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    END             shift and go to state 51
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucao_com_label            shift and go to state 35
+    instrucao                      shift and go to state 18
+
+state 33
+
+    (11) declaracoes -> declaracoes declaracao .
+
+    INTEGER         reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    REAL            reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    LOGICAL         reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    INT             reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    PRINT           reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    READ            reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    IDEN            reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    DO              reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    CONTINUE        reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    IF              reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    GOTO            reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+    RETURN          reduce using rule 11 (declaracoes -> declaracoes declaracao .)
+
+
+state 34
+
+    (4) bloco_principal -> cabecalho instrucoes END .
+
+    INTEGER         reduce using rule 4 (bloco_principal -> cabecalho instrucoes END .)
+    REAL            reduce using rule 4 (bloco_principal -> cabecalho instrucoes END .)
+    SUBROUTINE      reduce using rule 4 (bloco_principal -> cabecalho instrucoes END .)
+    $end            reduce using rule 4 (bloco_principal -> cabecalho instrucoes END .)
+
+
+state 35
+
+    (22) instrucoes -> instrucoes instrucao_com_label .
+
+    END             reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    INT             reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    PRINT           reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    READ            reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    IDEN            reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    DO              reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    CONTINUE        reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    IF              reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    GOTO            reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    RETURN          reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    ENDIF           reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+    ELSE            reduce using rule 22 (instrucoes -> instrucoes instrucao_com_label .)
+
+
+state 36
+
+    (13) declaracao -> INTEGER lista_ids .
+    (16) lista_ids -> lista_ids . COMMA IDEN
+    (17) lista_ids -> lista_ids . COMMA IDEN LPAREN INT RPAREN
+
+    INTEGER         reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    REAL            reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    LOGICAL         reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    INT             reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    PRINT           reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    READ            reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    IDEN            reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    DO              reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    CONTINUE        reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    IF              reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    GOTO            reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    RETURN          reduce using rule 13 (declaracao -> INTEGER lista_ids .)
+    COMMA           shift and go to state 52
+
+
+state 37
+
+    (18) lista_ids -> IDEN .
+    (19) lista_ids -> IDEN . LPAREN INT RPAREN
+
+    COMMA           reduce using rule 18 (lista_ids -> IDEN .)
+    INTEGER         reduce using rule 18 (lista_ids -> IDEN .)
+    REAL            reduce using rule 18 (lista_ids -> IDEN .)
+    LOGICAL         reduce using rule 18 (lista_ids -> IDEN .)
+    INT             reduce using rule 18 (lista_ids -> IDEN .)
+    PRINT           reduce using rule 18 (lista_ids -> IDEN .)
+    READ            reduce using rule 18 (lista_ids -> IDEN .)
+    IDEN            reduce using rule 18 (lista_ids -> IDEN .)
+    DO              reduce using rule 18 (lista_ids -> IDEN .)
+    CONTINUE        reduce using rule 18 (lista_ids -> IDEN .)
+    IF              reduce using rule 18 (lista_ids -> IDEN .)
+    GOTO            reduce using rule 18 (lista_ids -> IDEN .)
+    RETURN          reduce using rule 18 (lista_ids -> IDEN .)
+    LPAREN          shift and go to state 53
+
+
+state 38
+
+    (14) declaracao -> REAL lista_ids .
+    (16) lista_ids -> lista_ids . COMMA IDEN
+    (17) lista_ids -> lista_ids . COMMA IDEN LPAREN INT RPAREN
+
+    INTEGER         reduce using rule 14 (declaracao -> REAL lista_ids .)
+    REAL            reduce using rule 14 (declaracao -> REAL lista_ids .)
+    LOGICAL         reduce using rule 14 (declaracao -> REAL lista_ids .)
+    INT             reduce using rule 14 (declaracao -> REAL lista_ids .)
+    PRINT           reduce using rule 14 (declaracao -> REAL lista_ids .)
+    READ            reduce using rule 14 (declaracao -> REAL lista_ids .)
+    IDEN            reduce using rule 14 (declaracao -> REAL lista_ids .)
+    DO              reduce using rule 14 (declaracao -> REAL lista_ids .)
+    CONTINUE        reduce using rule 14 (declaracao -> REAL lista_ids .)
+    IF              reduce using rule 14 (declaracao -> REAL lista_ids .)
+    GOTO            reduce using rule 14 (declaracao -> REAL lista_ids .)
+    RETURN          reduce using rule 14 (declaracao -> REAL lista_ids .)
+    COMMA           shift and go to state 52
+
+
+state 39
+
+    (15) declaracao -> LOGICAL lista_ids .
+    (16) lista_ids -> lista_ids . COMMA IDEN
+    (17) lista_ids -> lista_ids . COMMA IDEN LPAREN INT RPAREN
+
+    INTEGER         reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    REAL            reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    LOGICAL         reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    INT             reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    PRINT           reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    READ            reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    IDEN            reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    DO              reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    CONTINUE        reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    IF              reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    GOTO            reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    RETURN          reduce using rule 15 (declaracao -> LOGICAL lista_ids .)
+    COMMA           shift and go to state 52
+
+
+state 40
+
+    (24) instrucao_com_label -> INT instrucao .
+
+    END             reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    INT             reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    PRINT           reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    READ            reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    IDEN            reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    DO              reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    CONTINUE        reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    IF              reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    GOTO            reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    RETURN          reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    ENDIF           reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+    ELSE            reduce using rule 24 (instrucao_com_label -> INT instrucao .)
+
+
+state 41
+
+    (26) instrucao -> PRINT MUL . COMMA lista_print
+
+    COMMA           shift and go to state 54
+
+
+state 42
+
+    (31) instrucao -> READ MUL . COMMA lista_ids_simples
+    (32) instrucao -> READ MUL . COMMA IDEN LPAREN expr RPAREN
+
+    COMMA           shift and go to state 55
+
+
+state 43
+
+    (33) instrucao -> IDEN ASSIGN . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 57
+
+state 44
+
+    (34) instrucao -> IDEN LPAREN . expr RPAREN ASSIGN expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 64
+
+state 45
+
+    (35) instrucao -> DO INT . IDEN ASSIGN expr COMMA expr
+
+    IDEN            shift and go to state 65
+
+
+state 46
+
+    (37) instrucao -> IF LPAREN . expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> IF LPAREN . expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 66
+
+state 47
+
+    (39) instrucao -> GOTO INT .
+
+    END             reduce using rule 39 (instrucao -> GOTO INT .)
+    INT             reduce using rule 39 (instrucao -> GOTO INT .)
+    PRINT           reduce using rule 39 (instrucao -> GOTO INT .)
+    READ            reduce using rule 39 (instrucao -> GOTO INT .)
+    IDEN            reduce using rule 39 (instrucao -> GOTO INT .)
+    DO              reduce using rule 39 (instrucao -> GOTO INT .)
+    CONTINUE        reduce using rule 39 (instrucao -> GOTO INT .)
+    IF              reduce using rule 39 (instrucao -> GOTO INT .)
+    GOTO            reduce using rule 39 (instrucao -> GOTO INT .)
+    RETURN          reduce using rule 39 (instrucao -> GOTO INT .)
+    ENDIF           reduce using rule 39 (instrucao -> GOTO INT .)
+    ELSE            reduce using rule 39 (instrucao -> GOTO INT .)
+
+
+state 48
+
+    (7) subprograma -> INTEGER FUNCTION IDEN . LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    LPAREN          shift and go to state 67
+
+
+state 49
+
+    (8) subprograma -> REAL FUNCTION IDEN . LPAREN lista_ids_simples RPAREN declaracoes instrucoes END
+
+    LPAREN          shift and go to state 68
+
+
+state 50
+
+    (9) subprograma -> SUBROUTINE IDEN LPAREN . lista_ids_simples RPAREN declaracoes instrucoes END
+    (20) lista_ids_simples -> . lista_ids_simples COMMA IDEN
+    (21) lista_ids_simples -> . IDEN
+
+    IDEN            shift and go to state 69
+
+    lista_ids_simples              shift and go to state 70
+
+state 51
+
+    (3) bloco_principal -> cabecalho declaracoes instrucoes END .
+
+    INTEGER         reduce using rule 3 (bloco_principal -> cabecalho declaracoes instrucoes END .)
+    REAL            reduce using rule 3 (bloco_principal -> cabecalho declaracoes instrucoes END .)
+    SUBROUTINE      reduce using rule 3 (bloco_principal -> cabecalho declaracoes instrucoes END .)
+    $end            reduce using rule 3 (bloco_principal -> cabecalho declaracoes instrucoes END .)
+
+
+state 52
+
+    (16) lista_ids -> lista_ids COMMA . IDEN
+    (17) lista_ids -> lista_ids COMMA . IDEN LPAREN INT RPAREN
+
+    IDEN            shift and go to state 71
+
+
+state 53
+
+    (19) lista_ids -> IDEN LPAREN . INT RPAREN
+
+    INT             shift and go to state 72
+
+
+state 54
+
+    (26) instrucao -> PRINT MUL COMMA . lista_print
+    (27) lista_print -> . lista_print COMMA elemento_print
+    (28) lista_print -> . elemento_print
+    (29) elemento_print -> . STRING
+    (30) elemento_print -> . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    STRING          shift and go to state 75
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    lista_print                    shift and go to state 73
+    elemento_print                 shift and go to state 74
+    expr                           shift and go to state 76
+
+state 55
+
+    (31) instrucao -> READ MUL COMMA . lista_ids_simples
+    (32) instrucao -> READ MUL COMMA . IDEN LPAREN expr RPAREN
+    (20) lista_ids_simples -> . lista_ids_simples COMMA IDEN
+    (21) lista_ids_simples -> . IDEN
+
+    IDEN            shift and go to state 78
+
+    lista_ids_simples              shift and go to state 77
+
+state 56
+
+    (57) expr -> IDEN . LPAREN lista_expr RPAREN
+    (62) expr -> IDEN .
+
+    LPAREN          shift and go to state 79
+    ADD             reduce using rule 62 (expr -> IDEN .)
+    SUB             reduce using rule 62 (expr -> IDEN .)
+    MUL             reduce using rule 62 (expr -> IDEN .)
+    DIV             reduce using rule 62 (expr -> IDEN .)
+    EQ              reduce using rule 62 (expr -> IDEN .)
+    NE              reduce using rule 62 (expr -> IDEN .)
+    LT              reduce using rule 62 (expr -> IDEN .)
+    LE              reduce using rule 62 (expr -> IDEN .)
+    GT              reduce using rule 62 (expr -> IDEN .)
+    GE              reduce using rule 62 (expr -> IDEN .)
+    AND             reduce using rule 62 (expr -> IDEN .)
+    OR              reduce using rule 62 (expr -> IDEN .)
+    END             reduce using rule 62 (expr -> IDEN .)
+    INT             reduce using rule 62 (expr -> IDEN .)
+    PRINT           reduce using rule 62 (expr -> IDEN .)
+    READ            reduce using rule 62 (expr -> IDEN .)
+    IDEN            reduce using rule 62 (expr -> IDEN .)
+    DO              reduce using rule 62 (expr -> IDEN .)
+    CONTINUE        reduce using rule 62 (expr -> IDEN .)
+    IF              reduce using rule 62 (expr -> IDEN .)
+    GOTO            reduce using rule 62 (expr -> IDEN .)
+    RETURN          reduce using rule 62 (expr -> IDEN .)
+    ENDIF           reduce using rule 62 (expr -> IDEN .)
+    ELSE            reduce using rule 62 (expr -> IDEN .)
+    RPAREN          reduce using rule 62 (expr -> IDEN .)
+    COMMA           reduce using rule 62 (expr -> IDEN .)
+
+
+state 57
+
+    (33) instrucao -> IDEN ASSIGN expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    END             reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    INT             reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    PRINT           reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    READ            reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    IDEN            reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    DO              reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    CONTINUE        reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    IF              reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    GOTO            reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    RETURN          reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    ENDIF           reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    ELSE            reduce using rule 33 (instrucao -> IDEN ASSIGN expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 58
+
+    (53) expr -> NOT . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 92
+
+state 59
+
+    (54) expr -> LPAREN . expr RPAREN
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 93
+
+state 60
+
+    (55) expr -> TRUE .
+
+    ADD             reduce using rule 55 (expr -> TRUE .)
+    SUB             reduce using rule 55 (expr -> TRUE .)
+    MUL             reduce using rule 55 (expr -> TRUE .)
+    DIV             reduce using rule 55 (expr -> TRUE .)
+    EQ              reduce using rule 55 (expr -> TRUE .)
+    NE              reduce using rule 55 (expr -> TRUE .)
+    LT              reduce using rule 55 (expr -> TRUE .)
+    LE              reduce using rule 55 (expr -> TRUE .)
+    GT              reduce using rule 55 (expr -> TRUE .)
+    GE              reduce using rule 55 (expr -> TRUE .)
+    AND             reduce using rule 55 (expr -> TRUE .)
+    OR              reduce using rule 55 (expr -> TRUE .)
+    END             reduce using rule 55 (expr -> TRUE .)
+    INT             reduce using rule 55 (expr -> TRUE .)
+    PRINT           reduce using rule 55 (expr -> TRUE .)
+    READ            reduce using rule 55 (expr -> TRUE .)
+    IDEN            reduce using rule 55 (expr -> TRUE .)
+    DO              reduce using rule 55 (expr -> TRUE .)
+    CONTINUE        reduce using rule 55 (expr -> TRUE .)
+    IF              reduce using rule 55 (expr -> TRUE .)
+    GOTO            reduce using rule 55 (expr -> TRUE .)
+    RETURN          reduce using rule 55 (expr -> TRUE .)
+    ENDIF           reduce using rule 55 (expr -> TRUE .)
+    ELSE            reduce using rule 55 (expr -> TRUE .)
+    RPAREN          reduce using rule 55 (expr -> TRUE .)
+    COMMA           reduce using rule 55 (expr -> TRUE .)
+
+
+state 61
+
+    (56) expr -> FALSE .
+
+    ADD             reduce using rule 56 (expr -> FALSE .)
+    SUB             reduce using rule 56 (expr -> FALSE .)
+    MUL             reduce using rule 56 (expr -> FALSE .)
+    DIV             reduce using rule 56 (expr -> FALSE .)
+    EQ              reduce using rule 56 (expr -> FALSE .)
+    NE              reduce using rule 56 (expr -> FALSE .)
+    LT              reduce using rule 56 (expr -> FALSE .)
+    LE              reduce using rule 56 (expr -> FALSE .)
+    GT              reduce using rule 56 (expr -> FALSE .)
+    GE              reduce using rule 56 (expr -> FALSE .)
+    AND             reduce using rule 56 (expr -> FALSE .)
+    OR              reduce using rule 56 (expr -> FALSE .)
+    END             reduce using rule 56 (expr -> FALSE .)
+    INT             reduce using rule 56 (expr -> FALSE .)
+    PRINT           reduce using rule 56 (expr -> FALSE .)
+    READ            reduce using rule 56 (expr -> FALSE .)
+    IDEN            reduce using rule 56 (expr -> FALSE .)
+    DO              reduce using rule 56 (expr -> FALSE .)
+    CONTINUE        reduce using rule 56 (expr -> FALSE .)
+    IF              reduce using rule 56 (expr -> FALSE .)
+    GOTO            reduce using rule 56 (expr -> FALSE .)
+    RETURN          reduce using rule 56 (expr -> FALSE .)
+    ENDIF           reduce using rule 56 (expr -> FALSE .)
+    ELSE            reduce using rule 56 (expr -> FALSE .)
+    RPAREN          reduce using rule 56 (expr -> FALSE .)
+    COMMA           reduce using rule 56 (expr -> FALSE .)
+
+
+state 62
+
+    (60) expr -> INT .
+
+    ADD             reduce using rule 60 (expr -> INT .)
+    SUB             reduce using rule 60 (expr -> INT .)
+    MUL             reduce using rule 60 (expr -> INT .)
+    DIV             reduce using rule 60 (expr -> INT .)
+    EQ              reduce using rule 60 (expr -> INT .)
+    NE              reduce using rule 60 (expr -> INT .)
+    LT              reduce using rule 60 (expr -> INT .)
+    LE              reduce using rule 60 (expr -> INT .)
+    GT              reduce using rule 60 (expr -> INT .)
+    GE              reduce using rule 60 (expr -> INT .)
+    AND             reduce using rule 60 (expr -> INT .)
+    OR              reduce using rule 60 (expr -> INT .)
+    END             reduce using rule 60 (expr -> INT .)
+    INT             reduce using rule 60 (expr -> INT .)
+    PRINT           reduce using rule 60 (expr -> INT .)
+    READ            reduce using rule 60 (expr -> INT .)
+    IDEN            reduce using rule 60 (expr -> INT .)
+    DO              reduce using rule 60 (expr -> INT .)
+    CONTINUE        reduce using rule 60 (expr -> INT .)
+    IF              reduce using rule 60 (expr -> INT .)
+    GOTO            reduce using rule 60 (expr -> INT .)
+    RETURN          reduce using rule 60 (expr -> INT .)
+    ENDIF           reduce using rule 60 (expr -> INT .)
+    ELSE            reduce using rule 60 (expr -> INT .)
+    RPAREN          reduce using rule 60 (expr -> INT .)
+    COMMA           reduce using rule 60 (expr -> INT .)
+
+
+state 63
+
+    (61) expr -> REAL_NUM .
+
+    ADD             reduce using rule 61 (expr -> REAL_NUM .)
+    SUB             reduce using rule 61 (expr -> REAL_NUM .)
+    MUL             reduce using rule 61 (expr -> REAL_NUM .)
+    DIV             reduce using rule 61 (expr -> REAL_NUM .)
+    EQ              reduce using rule 61 (expr -> REAL_NUM .)
+    NE              reduce using rule 61 (expr -> REAL_NUM .)
+    LT              reduce using rule 61 (expr -> REAL_NUM .)
+    LE              reduce using rule 61 (expr -> REAL_NUM .)
+    GT              reduce using rule 61 (expr -> REAL_NUM .)
+    GE              reduce using rule 61 (expr -> REAL_NUM .)
+    AND             reduce using rule 61 (expr -> REAL_NUM .)
+    OR              reduce using rule 61 (expr -> REAL_NUM .)
+    END             reduce using rule 61 (expr -> REAL_NUM .)
+    INT             reduce using rule 61 (expr -> REAL_NUM .)
+    PRINT           reduce using rule 61 (expr -> REAL_NUM .)
+    READ            reduce using rule 61 (expr -> REAL_NUM .)
+    IDEN            reduce using rule 61 (expr -> REAL_NUM .)
+    DO              reduce using rule 61 (expr -> REAL_NUM .)
+    CONTINUE        reduce using rule 61 (expr -> REAL_NUM .)
+    IF              reduce using rule 61 (expr -> REAL_NUM .)
+    GOTO            reduce using rule 61 (expr -> REAL_NUM .)
+    RETURN          reduce using rule 61 (expr -> REAL_NUM .)
+    ENDIF           reduce using rule 61 (expr -> REAL_NUM .)
+    ELSE            reduce using rule 61 (expr -> REAL_NUM .)
+    RPAREN          reduce using rule 61 (expr -> REAL_NUM .)
+    COMMA           reduce using rule 61 (expr -> REAL_NUM .)
+
+
+state 64
+
+    (34) instrucao -> IDEN LPAREN expr . RPAREN ASSIGN expr
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    RPAREN          shift and go to state 94
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 65
+
+    (35) instrucao -> DO INT IDEN . ASSIGN expr COMMA expr
+
+    ASSIGN          shift and go to state 95
+
+
+state 66
+
+    (37) instrucao -> IF LPAREN expr . RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> IF LPAREN expr . RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    RPAREN          shift and go to state 96
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 67
+
+    (7) subprograma -> INTEGER FUNCTION IDEN LPAREN . lista_ids_simples RPAREN declaracoes instrucoes END
+    (20) lista_ids_simples -> . lista_ids_simples COMMA IDEN
+    (21) lista_ids_simples -> . IDEN
+
+    IDEN            shift and go to state 69
+
+    lista_ids_simples              shift and go to state 97
+
+state 68
+
+    (8) subprograma -> REAL FUNCTION IDEN LPAREN . lista_ids_simples RPAREN declaracoes instrucoes END
+    (20) lista_ids_simples -> . lista_ids_simples COMMA IDEN
+    (21) lista_ids_simples -> . IDEN
+
+    IDEN            shift and go to state 69
+
+    lista_ids_simples              shift and go to state 98
+
+state 69
+
+    (21) lista_ids_simples -> IDEN .
+
+    RPAREN          reduce using rule 21 (lista_ids_simples -> IDEN .)
+    COMMA           reduce using rule 21 (lista_ids_simples -> IDEN .)
+
+
+state 70
+
+    (9) subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples . RPAREN declaracoes instrucoes END
+    (20) lista_ids_simples -> lista_ids_simples . COMMA IDEN
+
+    RPAREN          shift and go to state 99
+    COMMA           shift and go to state 100
+
+
+state 71
+
+    (16) lista_ids -> lista_ids COMMA IDEN .
+    (17) lista_ids -> lista_ids COMMA IDEN . LPAREN INT RPAREN
+
+    COMMA           reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    INTEGER         reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    REAL            reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    LOGICAL         reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    INT             reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    PRINT           reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    READ            reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    IDEN            reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    DO              reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    CONTINUE        reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    IF              reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    GOTO            reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    RETURN          reduce using rule 16 (lista_ids -> lista_ids COMMA IDEN .)
+    LPAREN          shift and go to state 101
+
+
+state 72
+
+    (19) lista_ids -> IDEN LPAREN INT . RPAREN
+
+    RPAREN          shift and go to state 102
+
+
+state 73
+
+    (26) instrucao -> PRINT MUL COMMA lista_print .
+    (27) lista_print -> lista_print . COMMA elemento_print
+
+    END             reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    INT             reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    PRINT           reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    READ            reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    IDEN            reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    DO              reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    CONTINUE        reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    IF              reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    GOTO            reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    RETURN          reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    ENDIF           reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    ELSE            reduce using rule 26 (instrucao -> PRINT MUL COMMA lista_print .)
+    COMMA           shift and go to state 103
+
+
+state 74
+
+    (28) lista_print -> elemento_print .
+
+    COMMA           reduce using rule 28 (lista_print -> elemento_print .)
+    END             reduce using rule 28 (lista_print -> elemento_print .)
+    INT             reduce using rule 28 (lista_print -> elemento_print .)
+    PRINT           reduce using rule 28 (lista_print -> elemento_print .)
+    READ            reduce using rule 28 (lista_print -> elemento_print .)
+    IDEN            reduce using rule 28 (lista_print -> elemento_print .)
+    DO              reduce using rule 28 (lista_print -> elemento_print .)
+    CONTINUE        reduce using rule 28 (lista_print -> elemento_print .)
+    IF              reduce using rule 28 (lista_print -> elemento_print .)
+    GOTO            reduce using rule 28 (lista_print -> elemento_print .)
+    RETURN          reduce using rule 28 (lista_print -> elemento_print .)
+    ENDIF           reduce using rule 28 (lista_print -> elemento_print .)
+    ELSE            reduce using rule 28 (lista_print -> elemento_print .)
+
+
+state 75
+
+    (29) elemento_print -> STRING .
+
+    COMMA           reduce using rule 29 (elemento_print -> STRING .)
+    END             reduce using rule 29 (elemento_print -> STRING .)
+    INT             reduce using rule 29 (elemento_print -> STRING .)
+    PRINT           reduce using rule 29 (elemento_print -> STRING .)
+    READ            reduce using rule 29 (elemento_print -> STRING .)
+    IDEN            reduce using rule 29 (elemento_print -> STRING .)
+    DO              reduce using rule 29 (elemento_print -> STRING .)
+    CONTINUE        reduce using rule 29 (elemento_print -> STRING .)
+    IF              reduce using rule 29 (elemento_print -> STRING .)
+    GOTO            reduce using rule 29 (elemento_print -> STRING .)
+    RETURN          reduce using rule 29 (elemento_print -> STRING .)
+    ENDIF           reduce using rule 29 (elemento_print -> STRING .)
+    ELSE            reduce using rule 29 (elemento_print -> STRING .)
+
+
+state 76
+
+    (30) elemento_print -> expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    COMMA           reduce using rule 30 (elemento_print -> expr .)
+    END             reduce using rule 30 (elemento_print -> expr .)
+    INT             reduce using rule 30 (elemento_print -> expr .)
+    PRINT           reduce using rule 30 (elemento_print -> expr .)
+    READ            reduce using rule 30 (elemento_print -> expr .)
+    IDEN            reduce using rule 30 (elemento_print -> expr .)
+    DO              reduce using rule 30 (elemento_print -> expr .)
+    CONTINUE        reduce using rule 30 (elemento_print -> expr .)
+    IF              reduce using rule 30 (elemento_print -> expr .)
+    GOTO            reduce using rule 30 (elemento_print -> expr .)
+    RETURN          reduce using rule 30 (elemento_print -> expr .)
+    ENDIF           reduce using rule 30 (elemento_print -> expr .)
+    ELSE            reduce using rule 30 (elemento_print -> expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 77
+
+    (31) instrucao -> READ MUL COMMA lista_ids_simples .
+    (20) lista_ids_simples -> lista_ids_simples . COMMA IDEN
+
+    END             reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    INT             reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    PRINT           reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    READ            reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    IDEN            reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    DO              reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    CONTINUE        reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    IF              reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    GOTO            reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    RETURN          reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    ENDIF           reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    ELSE            reduce using rule 31 (instrucao -> READ MUL COMMA lista_ids_simples .)
+    COMMA           shift and go to state 100
+
+
+state 78
+
+    (32) instrucao -> READ MUL COMMA IDEN . LPAREN expr RPAREN
+    (21) lista_ids_simples -> IDEN .
+
+    LPAREN          shift and go to state 104
+    COMMA           reduce using rule 21 (lista_ids_simples -> IDEN .)
+    END             reduce using rule 21 (lista_ids_simples -> IDEN .)
+    INT             reduce using rule 21 (lista_ids_simples -> IDEN .)
+    PRINT           reduce using rule 21 (lista_ids_simples -> IDEN .)
+    READ            reduce using rule 21 (lista_ids_simples -> IDEN .)
+    IDEN            reduce using rule 21 (lista_ids_simples -> IDEN .)
+    DO              reduce using rule 21 (lista_ids_simples -> IDEN .)
+    CONTINUE        reduce using rule 21 (lista_ids_simples -> IDEN .)
+    IF              reduce using rule 21 (lista_ids_simples -> IDEN .)
+    GOTO            reduce using rule 21 (lista_ids_simples -> IDEN .)
+    RETURN          reduce using rule 21 (lista_ids_simples -> IDEN .)
+    ENDIF           reduce using rule 21 (lista_ids_simples -> IDEN .)
+    ELSE            reduce using rule 21 (lista_ids_simples -> IDEN .)
+
+
+state 79
+
+    (57) expr -> IDEN LPAREN . lista_expr RPAREN
+    (58) lista_expr -> . lista_expr COMMA expr
+    (59) lista_expr -> . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    lista_expr                     shift and go to state 105
+    expr                           shift and go to state 106
+
+state 80
+
+    (41) expr -> expr ADD . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 107
+
+state 81
+
+    (42) expr -> expr SUB . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 108
+
+state 82
+
+    (43) expr -> expr MUL . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 109
+
+state 83
+
+    (44) expr -> expr DIV . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 110
+
+state 84
+
+    (45) expr -> expr EQ . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 111
+
+state 85
+
+    (46) expr -> expr NE . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 112
+
+state 86
+
+    (47) expr -> expr LT . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 113
+
+state 87
+
+    (48) expr -> expr LE . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 114
+
+state 88
+
+    (49) expr -> expr GT . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 115
+
+state 89
+
+    (50) expr -> expr GE . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 116
+
+state 90
+
+    (51) expr -> expr AND . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 117
+
+state 91
+
+    (52) expr -> expr OR . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 118
+
+state 92
+
+    (53) expr -> NOT expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    AND             reduce using rule 53 (expr -> NOT expr .)
+    OR              reduce using rule 53 (expr -> NOT expr .)
+    END             reduce using rule 53 (expr -> NOT expr .)
+    INT             reduce using rule 53 (expr -> NOT expr .)
+    PRINT           reduce using rule 53 (expr -> NOT expr .)
+    READ            reduce using rule 53 (expr -> NOT expr .)
+    IDEN            reduce using rule 53 (expr -> NOT expr .)
+    DO              reduce using rule 53 (expr -> NOT expr .)
+    CONTINUE        reduce using rule 53 (expr -> NOT expr .)
+    IF              reduce using rule 53 (expr -> NOT expr .)
+    GOTO            reduce using rule 53 (expr -> NOT expr .)
+    RETURN          reduce using rule 53 (expr -> NOT expr .)
+    ENDIF           reduce using rule 53 (expr -> NOT expr .)
+    ELSE            reduce using rule 53 (expr -> NOT expr .)
+    RPAREN          reduce using rule 53 (expr -> NOT expr .)
+    COMMA           reduce using rule 53 (expr -> NOT expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+
+  ! ADD             [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! SUB             [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! MUL             [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! DIV             [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! EQ              [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! NE              [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! LT              [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! LE              [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! GT              [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! GE              [ reduce using rule 53 (expr -> NOT expr .) ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 93
+
+    (54) expr -> LPAREN expr . RPAREN
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    RPAREN          shift and go to state 119
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 94
+
+    (34) instrucao -> IDEN LPAREN expr RPAREN . ASSIGN expr
+
+    ASSIGN          shift and go to state 120
+
+
+state 95
+
+    (35) instrucao -> DO INT IDEN ASSIGN . expr COMMA expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 121
+
+state 96
+
+    (37) instrucao -> IF LPAREN expr RPAREN . THEN instrucoes ENDIF
+    (38) instrucao -> IF LPAREN expr RPAREN . THEN instrucoes ELSE instrucoes ENDIF
+
+    THEN            shift and go to state 122
+
+
+state 97
+
+    (7) subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples . RPAREN declaracoes instrucoes END
+    (20) lista_ids_simples -> lista_ids_simples . COMMA IDEN
+
+    RPAREN          shift and go to state 123
+    COMMA           shift and go to state 100
+
+
+state 98
+
+    (8) subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples . RPAREN declaracoes instrucoes END
+    (20) lista_ids_simples -> lista_ids_simples . COMMA IDEN
+
+    RPAREN          shift and go to state 124
+    COMMA           shift and go to state 100
+
+
+state 99
+
+    (9) subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN . declaracoes instrucoes END
+    (11) declaracoes -> . declaracoes declaracao
+    (12) declaracoes -> . declaracao
+    (13) declaracao -> . INTEGER lista_ids
+    (14) declaracao -> . REAL lista_ids
+    (15) declaracao -> . LOGICAL lista_ids
+
+    INTEGER         shift and go to state 14
+    REAL            shift and go to state 15
+    LOGICAL         shift and go to state 16
+
+    declaracoes                    shift and go to state 125
+    declaracao                     shift and go to state 12
+
+state 100
+
+    (20) lista_ids_simples -> lista_ids_simples COMMA . IDEN
+
+    IDEN            shift and go to state 126
+
+
+state 101
+
+    (17) lista_ids -> lista_ids COMMA IDEN LPAREN . INT RPAREN
+
+    INT             shift and go to state 127
+
+
+state 102
+
+    (19) lista_ids -> IDEN LPAREN INT RPAREN .
+
+    COMMA           reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    INTEGER         reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    REAL            reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    LOGICAL         reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    INT             reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    PRINT           reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    READ            reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    IDEN            reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    DO              reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    CONTINUE        reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    IF              reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    GOTO            reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+    RETURN          reduce using rule 19 (lista_ids -> IDEN LPAREN INT RPAREN .)
+
+
+state 103
+
+    (27) lista_print -> lista_print COMMA . elemento_print
+    (29) elemento_print -> . STRING
+    (30) elemento_print -> . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    STRING          shift and go to state 75
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    elemento_print                 shift and go to state 128
+    expr                           shift and go to state 76
+
+state 104
+
+    (32) instrucao -> READ MUL COMMA IDEN LPAREN . expr RPAREN
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 129
+
+state 105
+
+    (57) expr -> IDEN LPAREN lista_expr . RPAREN
+    (58) lista_expr -> lista_expr . COMMA expr
+
+    RPAREN          shift and go to state 130
+    COMMA           shift and go to state 131
+
+
+state 106
+
+    (59) lista_expr -> expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    RPAREN          reduce using rule 59 (lista_expr -> expr .)
+    COMMA           reduce using rule 59 (lista_expr -> expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 107
+
+    (41) expr -> expr ADD expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    ADD             reduce using rule 41 (expr -> expr ADD expr .)
+    SUB             reduce using rule 41 (expr -> expr ADD expr .)
+    EQ              reduce using rule 41 (expr -> expr ADD expr .)
+    NE              reduce using rule 41 (expr -> expr ADD expr .)
+    LT              reduce using rule 41 (expr -> expr ADD expr .)
+    LE              reduce using rule 41 (expr -> expr ADD expr .)
+    GT              reduce using rule 41 (expr -> expr ADD expr .)
+    GE              reduce using rule 41 (expr -> expr ADD expr .)
+    AND             reduce using rule 41 (expr -> expr ADD expr .)
+    OR              reduce using rule 41 (expr -> expr ADD expr .)
+    END             reduce using rule 41 (expr -> expr ADD expr .)
+    INT             reduce using rule 41 (expr -> expr ADD expr .)
+    PRINT           reduce using rule 41 (expr -> expr ADD expr .)
+    READ            reduce using rule 41 (expr -> expr ADD expr .)
+    IDEN            reduce using rule 41 (expr -> expr ADD expr .)
+    DO              reduce using rule 41 (expr -> expr ADD expr .)
+    CONTINUE        reduce using rule 41 (expr -> expr ADD expr .)
+    IF              reduce using rule 41 (expr -> expr ADD expr .)
+    GOTO            reduce using rule 41 (expr -> expr ADD expr .)
+    RETURN          reduce using rule 41 (expr -> expr ADD expr .)
+    ENDIF           reduce using rule 41 (expr -> expr ADD expr .)
+    ELSE            reduce using rule 41 (expr -> expr ADD expr .)
+    RPAREN          reduce using rule 41 (expr -> expr ADD expr .)
+    COMMA           reduce using rule 41 (expr -> expr ADD expr .)
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+
+  ! MUL             [ reduce using rule 41 (expr -> expr ADD expr .) ]
+  ! DIV             [ reduce using rule 41 (expr -> expr ADD expr .) ]
+  ! ADD             [ shift and go to state 80 ]
+  ! SUB             [ shift and go to state 81 ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 108
+
+    (42) expr -> expr SUB expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    ADD             reduce using rule 42 (expr -> expr SUB expr .)
+    SUB             reduce using rule 42 (expr -> expr SUB expr .)
+    EQ              reduce using rule 42 (expr -> expr SUB expr .)
+    NE              reduce using rule 42 (expr -> expr SUB expr .)
+    LT              reduce using rule 42 (expr -> expr SUB expr .)
+    LE              reduce using rule 42 (expr -> expr SUB expr .)
+    GT              reduce using rule 42 (expr -> expr SUB expr .)
+    GE              reduce using rule 42 (expr -> expr SUB expr .)
+    AND             reduce using rule 42 (expr -> expr SUB expr .)
+    OR              reduce using rule 42 (expr -> expr SUB expr .)
+    END             reduce using rule 42 (expr -> expr SUB expr .)
+    INT             reduce using rule 42 (expr -> expr SUB expr .)
+    PRINT           reduce using rule 42 (expr -> expr SUB expr .)
+    READ            reduce using rule 42 (expr -> expr SUB expr .)
+    IDEN            reduce using rule 42 (expr -> expr SUB expr .)
+    DO              reduce using rule 42 (expr -> expr SUB expr .)
+    CONTINUE        reduce using rule 42 (expr -> expr SUB expr .)
+    IF              reduce using rule 42 (expr -> expr SUB expr .)
+    GOTO            reduce using rule 42 (expr -> expr SUB expr .)
+    RETURN          reduce using rule 42 (expr -> expr SUB expr .)
+    ENDIF           reduce using rule 42 (expr -> expr SUB expr .)
+    ELSE            reduce using rule 42 (expr -> expr SUB expr .)
+    RPAREN          reduce using rule 42 (expr -> expr SUB expr .)
+    COMMA           reduce using rule 42 (expr -> expr SUB expr .)
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+
+  ! MUL             [ reduce using rule 42 (expr -> expr SUB expr .) ]
+  ! DIV             [ reduce using rule 42 (expr -> expr SUB expr .) ]
+  ! ADD             [ shift and go to state 80 ]
+  ! SUB             [ shift and go to state 81 ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 109
+
+    (43) expr -> expr MUL expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    ADD             reduce using rule 43 (expr -> expr MUL expr .)
+    SUB             reduce using rule 43 (expr -> expr MUL expr .)
+    MUL             reduce using rule 43 (expr -> expr MUL expr .)
+    DIV             reduce using rule 43 (expr -> expr MUL expr .)
+    EQ              reduce using rule 43 (expr -> expr MUL expr .)
+    NE              reduce using rule 43 (expr -> expr MUL expr .)
+    LT              reduce using rule 43 (expr -> expr MUL expr .)
+    LE              reduce using rule 43 (expr -> expr MUL expr .)
+    GT              reduce using rule 43 (expr -> expr MUL expr .)
+    GE              reduce using rule 43 (expr -> expr MUL expr .)
+    AND             reduce using rule 43 (expr -> expr MUL expr .)
+    OR              reduce using rule 43 (expr -> expr MUL expr .)
+    END             reduce using rule 43 (expr -> expr MUL expr .)
+    INT             reduce using rule 43 (expr -> expr MUL expr .)
+    PRINT           reduce using rule 43 (expr -> expr MUL expr .)
+    READ            reduce using rule 43 (expr -> expr MUL expr .)
+    IDEN            reduce using rule 43 (expr -> expr MUL expr .)
+    DO              reduce using rule 43 (expr -> expr MUL expr .)
+    CONTINUE        reduce using rule 43 (expr -> expr MUL expr .)
+    IF              reduce using rule 43 (expr -> expr MUL expr .)
+    GOTO            reduce using rule 43 (expr -> expr MUL expr .)
+    RETURN          reduce using rule 43 (expr -> expr MUL expr .)
+    ENDIF           reduce using rule 43 (expr -> expr MUL expr .)
+    ELSE            reduce using rule 43 (expr -> expr MUL expr .)
+    RPAREN          reduce using rule 43 (expr -> expr MUL expr .)
+    COMMA           reduce using rule 43 (expr -> expr MUL expr .)
+
+  ! ADD             [ shift and go to state 80 ]
+  ! SUB             [ shift and go to state 81 ]
+  ! MUL             [ shift and go to state 82 ]
+  ! DIV             [ shift and go to state 83 ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 110
+
+    (44) expr -> expr DIV expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    ADD             reduce using rule 44 (expr -> expr DIV expr .)
+    SUB             reduce using rule 44 (expr -> expr DIV expr .)
+    MUL             reduce using rule 44 (expr -> expr DIV expr .)
+    DIV             reduce using rule 44 (expr -> expr DIV expr .)
+    EQ              reduce using rule 44 (expr -> expr DIV expr .)
+    NE              reduce using rule 44 (expr -> expr DIV expr .)
+    LT              reduce using rule 44 (expr -> expr DIV expr .)
+    LE              reduce using rule 44 (expr -> expr DIV expr .)
+    GT              reduce using rule 44 (expr -> expr DIV expr .)
+    GE              reduce using rule 44 (expr -> expr DIV expr .)
+    AND             reduce using rule 44 (expr -> expr DIV expr .)
+    OR              reduce using rule 44 (expr -> expr DIV expr .)
+    END             reduce using rule 44 (expr -> expr DIV expr .)
+    INT             reduce using rule 44 (expr -> expr DIV expr .)
+    PRINT           reduce using rule 44 (expr -> expr DIV expr .)
+    READ            reduce using rule 44 (expr -> expr DIV expr .)
+    IDEN            reduce using rule 44 (expr -> expr DIV expr .)
+    DO              reduce using rule 44 (expr -> expr DIV expr .)
+    CONTINUE        reduce using rule 44 (expr -> expr DIV expr .)
+    IF              reduce using rule 44 (expr -> expr DIV expr .)
+    GOTO            reduce using rule 44 (expr -> expr DIV expr .)
+    RETURN          reduce using rule 44 (expr -> expr DIV expr .)
+    ENDIF           reduce using rule 44 (expr -> expr DIV expr .)
+    ELSE            reduce using rule 44 (expr -> expr DIV expr .)
+    RPAREN          reduce using rule 44 (expr -> expr DIV expr .)
+    COMMA           reduce using rule 44 (expr -> expr DIV expr .)
+
+  ! ADD             [ shift and go to state 80 ]
+  ! SUB             [ shift and go to state 81 ]
+  ! MUL             [ shift and go to state 82 ]
+  ! DIV             [ shift and go to state 83 ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 111
+
+    (45) expr -> expr EQ expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    EQ              reduce using rule 45 (expr -> expr EQ expr .)
+    NE              reduce using rule 45 (expr -> expr EQ expr .)
+    LT              reduce using rule 45 (expr -> expr EQ expr .)
+    LE              reduce using rule 45 (expr -> expr EQ expr .)
+    GT              reduce using rule 45 (expr -> expr EQ expr .)
+    GE              reduce using rule 45 (expr -> expr EQ expr .)
+    AND             reduce using rule 45 (expr -> expr EQ expr .)
+    OR              reduce using rule 45 (expr -> expr EQ expr .)
+    END             reduce using rule 45 (expr -> expr EQ expr .)
+    INT             reduce using rule 45 (expr -> expr EQ expr .)
+    PRINT           reduce using rule 45 (expr -> expr EQ expr .)
+    READ            reduce using rule 45 (expr -> expr EQ expr .)
+    IDEN            reduce using rule 45 (expr -> expr EQ expr .)
+    DO              reduce using rule 45 (expr -> expr EQ expr .)
+    CONTINUE        reduce using rule 45 (expr -> expr EQ expr .)
+    IF              reduce using rule 45 (expr -> expr EQ expr .)
+    GOTO            reduce using rule 45 (expr -> expr EQ expr .)
+    RETURN          reduce using rule 45 (expr -> expr EQ expr .)
+    ENDIF           reduce using rule 45 (expr -> expr EQ expr .)
+    ELSE            reduce using rule 45 (expr -> expr EQ expr .)
+    RPAREN          reduce using rule 45 (expr -> expr EQ expr .)
+    COMMA           reduce using rule 45 (expr -> expr EQ expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+
+  ! ADD             [ reduce using rule 45 (expr -> expr EQ expr .) ]
+  ! SUB             [ reduce using rule 45 (expr -> expr EQ expr .) ]
+  ! MUL             [ reduce using rule 45 (expr -> expr EQ expr .) ]
+  ! DIV             [ reduce using rule 45 (expr -> expr EQ expr .) ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 112
+
+    (46) expr -> expr NE expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    EQ              reduce using rule 46 (expr -> expr NE expr .)
+    NE              reduce using rule 46 (expr -> expr NE expr .)
+    LT              reduce using rule 46 (expr -> expr NE expr .)
+    LE              reduce using rule 46 (expr -> expr NE expr .)
+    GT              reduce using rule 46 (expr -> expr NE expr .)
+    GE              reduce using rule 46 (expr -> expr NE expr .)
+    AND             reduce using rule 46 (expr -> expr NE expr .)
+    OR              reduce using rule 46 (expr -> expr NE expr .)
+    END             reduce using rule 46 (expr -> expr NE expr .)
+    INT             reduce using rule 46 (expr -> expr NE expr .)
+    PRINT           reduce using rule 46 (expr -> expr NE expr .)
+    READ            reduce using rule 46 (expr -> expr NE expr .)
+    IDEN            reduce using rule 46 (expr -> expr NE expr .)
+    DO              reduce using rule 46 (expr -> expr NE expr .)
+    CONTINUE        reduce using rule 46 (expr -> expr NE expr .)
+    IF              reduce using rule 46 (expr -> expr NE expr .)
+    GOTO            reduce using rule 46 (expr -> expr NE expr .)
+    RETURN          reduce using rule 46 (expr -> expr NE expr .)
+    ENDIF           reduce using rule 46 (expr -> expr NE expr .)
+    ELSE            reduce using rule 46 (expr -> expr NE expr .)
+    RPAREN          reduce using rule 46 (expr -> expr NE expr .)
+    COMMA           reduce using rule 46 (expr -> expr NE expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+
+  ! ADD             [ reduce using rule 46 (expr -> expr NE expr .) ]
+  ! SUB             [ reduce using rule 46 (expr -> expr NE expr .) ]
+  ! MUL             [ reduce using rule 46 (expr -> expr NE expr .) ]
+  ! DIV             [ reduce using rule 46 (expr -> expr NE expr .) ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 113
+
+    (47) expr -> expr LT expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    EQ              reduce using rule 47 (expr -> expr LT expr .)
+    NE              reduce using rule 47 (expr -> expr LT expr .)
+    LT              reduce using rule 47 (expr -> expr LT expr .)
+    LE              reduce using rule 47 (expr -> expr LT expr .)
+    GT              reduce using rule 47 (expr -> expr LT expr .)
+    GE              reduce using rule 47 (expr -> expr LT expr .)
+    AND             reduce using rule 47 (expr -> expr LT expr .)
+    OR              reduce using rule 47 (expr -> expr LT expr .)
+    END             reduce using rule 47 (expr -> expr LT expr .)
+    INT             reduce using rule 47 (expr -> expr LT expr .)
+    PRINT           reduce using rule 47 (expr -> expr LT expr .)
+    READ            reduce using rule 47 (expr -> expr LT expr .)
+    IDEN            reduce using rule 47 (expr -> expr LT expr .)
+    DO              reduce using rule 47 (expr -> expr LT expr .)
+    CONTINUE        reduce using rule 47 (expr -> expr LT expr .)
+    IF              reduce using rule 47 (expr -> expr LT expr .)
+    GOTO            reduce using rule 47 (expr -> expr LT expr .)
+    RETURN          reduce using rule 47 (expr -> expr LT expr .)
+    ENDIF           reduce using rule 47 (expr -> expr LT expr .)
+    ELSE            reduce using rule 47 (expr -> expr LT expr .)
+    RPAREN          reduce using rule 47 (expr -> expr LT expr .)
+    COMMA           reduce using rule 47 (expr -> expr LT expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+
+  ! ADD             [ reduce using rule 47 (expr -> expr LT expr .) ]
+  ! SUB             [ reduce using rule 47 (expr -> expr LT expr .) ]
+  ! MUL             [ reduce using rule 47 (expr -> expr LT expr .) ]
+  ! DIV             [ reduce using rule 47 (expr -> expr LT expr .) ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 114
+
+    (48) expr -> expr LE expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    EQ              reduce using rule 48 (expr -> expr LE expr .)
+    NE              reduce using rule 48 (expr -> expr LE expr .)
+    LT              reduce using rule 48 (expr -> expr LE expr .)
+    LE              reduce using rule 48 (expr -> expr LE expr .)
+    GT              reduce using rule 48 (expr -> expr LE expr .)
+    GE              reduce using rule 48 (expr -> expr LE expr .)
+    AND             reduce using rule 48 (expr -> expr LE expr .)
+    OR              reduce using rule 48 (expr -> expr LE expr .)
+    END             reduce using rule 48 (expr -> expr LE expr .)
+    INT             reduce using rule 48 (expr -> expr LE expr .)
+    PRINT           reduce using rule 48 (expr -> expr LE expr .)
+    READ            reduce using rule 48 (expr -> expr LE expr .)
+    IDEN            reduce using rule 48 (expr -> expr LE expr .)
+    DO              reduce using rule 48 (expr -> expr LE expr .)
+    CONTINUE        reduce using rule 48 (expr -> expr LE expr .)
+    IF              reduce using rule 48 (expr -> expr LE expr .)
+    GOTO            reduce using rule 48 (expr -> expr LE expr .)
+    RETURN          reduce using rule 48 (expr -> expr LE expr .)
+    ENDIF           reduce using rule 48 (expr -> expr LE expr .)
+    ELSE            reduce using rule 48 (expr -> expr LE expr .)
+    RPAREN          reduce using rule 48 (expr -> expr LE expr .)
+    COMMA           reduce using rule 48 (expr -> expr LE expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+
+  ! ADD             [ reduce using rule 48 (expr -> expr LE expr .) ]
+  ! SUB             [ reduce using rule 48 (expr -> expr LE expr .) ]
+  ! MUL             [ reduce using rule 48 (expr -> expr LE expr .) ]
+  ! DIV             [ reduce using rule 48 (expr -> expr LE expr .) ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 115
+
+    (49) expr -> expr GT expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    EQ              reduce using rule 49 (expr -> expr GT expr .)
+    NE              reduce using rule 49 (expr -> expr GT expr .)
+    LT              reduce using rule 49 (expr -> expr GT expr .)
+    LE              reduce using rule 49 (expr -> expr GT expr .)
+    GT              reduce using rule 49 (expr -> expr GT expr .)
+    GE              reduce using rule 49 (expr -> expr GT expr .)
+    AND             reduce using rule 49 (expr -> expr GT expr .)
+    OR              reduce using rule 49 (expr -> expr GT expr .)
+    END             reduce using rule 49 (expr -> expr GT expr .)
+    INT             reduce using rule 49 (expr -> expr GT expr .)
+    PRINT           reduce using rule 49 (expr -> expr GT expr .)
+    READ            reduce using rule 49 (expr -> expr GT expr .)
+    IDEN            reduce using rule 49 (expr -> expr GT expr .)
+    DO              reduce using rule 49 (expr -> expr GT expr .)
+    CONTINUE        reduce using rule 49 (expr -> expr GT expr .)
+    IF              reduce using rule 49 (expr -> expr GT expr .)
+    GOTO            reduce using rule 49 (expr -> expr GT expr .)
+    RETURN          reduce using rule 49 (expr -> expr GT expr .)
+    ENDIF           reduce using rule 49 (expr -> expr GT expr .)
+    ELSE            reduce using rule 49 (expr -> expr GT expr .)
+    RPAREN          reduce using rule 49 (expr -> expr GT expr .)
+    COMMA           reduce using rule 49 (expr -> expr GT expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+
+  ! ADD             [ reduce using rule 49 (expr -> expr GT expr .) ]
+  ! SUB             [ reduce using rule 49 (expr -> expr GT expr .) ]
+  ! MUL             [ reduce using rule 49 (expr -> expr GT expr .) ]
+  ! DIV             [ reduce using rule 49 (expr -> expr GT expr .) ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 116
+
+    (50) expr -> expr GE expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    EQ              reduce using rule 50 (expr -> expr GE expr .)
+    NE              reduce using rule 50 (expr -> expr GE expr .)
+    LT              reduce using rule 50 (expr -> expr GE expr .)
+    LE              reduce using rule 50 (expr -> expr GE expr .)
+    GT              reduce using rule 50 (expr -> expr GE expr .)
+    GE              reduce using rule 50 (expr -> expr GE expr .)
+    AND             reduce using rule 50 (expr -> expr GE expr .)
+    OR              reduce using rule 50 (expr -> expr GE expr .)
+    END             reduce using rule 50 (expr -> expr GE expr .)
+    INT             reduce using rule 50 (expr -> expr GE expr .)
+    PRINT           reduce using rule 50 (expr -> expr GE expr .)
+    READ            reduce using rule 50 (expr -> expr GE expr .)
+    IDEN            reduce using rule 50 (expr -> expr GE expr .)
+    DO              reduce using rule 50 (expr -> expr GE expr .)
+    CONTINUE        reduce using rule 50 (expr -> expr GE expr .)
+    IF              reduce using rule 50 (expr -> expr GE expr .)
+    GOTO            reduce using rule 50 (expr -> expr GE expr .)
+    RETURN          reduce using rule 50 (expr -> expr GE expr .)
+    ENDIF           reduce using rule 50 (expr -> expr GE expr .)
+    ELSE            reduce using rule 50 (expr -> expr GE expr .)
+    RPAREN          reduce using rule 50 (expr -> expr GE expr .)
+    COMMA           reduce using rule 50 (expr -> expr GE expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+
+  ! ADD             [ reduce using rule 50 (expr -> expr GE expr .) ]
+  ! SUB             [ reduce using rule 50 (expr -> expr GE expr .) ]
+  ! MUL             [ reduce using rule 50 (expr -> expr GE expr .) ]
+  ! DIV             [ reduce using rule 50 (expr -> expr GE expr .) ]
+  ! EQ              [ shift and go to state 84 ]
+  ! NE              [ shift and go to state 85 ]
+  ! LT              [ shift and go to state 86 ]
+  ! LE              [ shift and go to state 87 ]
+  ! GT              [ shift and go to state 88 ]
+  ! GE              [ shift and go to state 89 ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 117
+
+    (51) expr -> expr AND expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    AND             reduce using rule 51 (expr -> expr AND expr .)
+    OR              reduce using rule 51 (expr -> expr AND expr .)
+    END             reduce using rule 51 (expr -> expr AND expr .)
+    INT             reduce using rule 51 (expr -> expr AND expr .)
+    PRINT           reduce using rule 51 (expr -> expr AND expr .)
+    READ            reduce using rule 51 (expr -> expr AND expr .)
+    IDEN            reduce using rule 51 (expr -> expr AND expr .)
+    DO              reduce using rule 51 (expr -> expr AND expr .)
+    CONTINUE        reduce using rule 51 (expr -> expr AND expr .)
+    IF              reduce using rule 51 (expr -> expr AND expr .)
+    GOTO            reduce using rule 51 (expr -> expr AND expr .)
+    RETURN          reduce using rule 51 (expr -> expr AND expr .)
+    ENDIF           reduce using rule 51 (expr -> expr AND expr .)
+    ELSE            reduce using rule 51 (expr -> expr AND expr .)
+    RPAREN          reduce using rule 51 (expr -> expr AND expr .)
+    COMMA           reduce using rule 51 (expr -> expr AND expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+
+  ! ADD             [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! SUB             [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! MUL             [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! DIV             [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! EQ              [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! NE              [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! LT              [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! LE              [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! GT              [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! GE              [ reduce using rule 51 (expr -> expr AND expr .) ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 118
+
+    (52) expr -> expr OR expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    AND             reduce using rule 52 (expr -> expr OR expr .)
+    OR              reduce using rule 52 (expr -> expr OR expr .)
+    END             reduce using rule 52 (expr -> expr OR expr .)
+    INT             reduce using rule 52 (expr -> expr OR expr .)
+    PRINT           reduce using rule 52 (expr -> expr OR expr .)
+    READ            reduce using rule 52 (expr -> expr OR expr .)
+    IDEN            reduce using rule 52 (expr -> expr OR expr .)
+    DO              reduce using rule 52 (expr -> expr OR expr .)
+    CONTINUE        reduce using rule 52 (expr -> expr OR expr .)
+    IF              reduce using rule 52 (expr -> expr OR expr .)
+    GOTO            reduce using rule 52 (expr -> expr OR expr .)
+    RETURN          reduce using rule 52 (expr -> expr OR expr .)
+    ENDIF           reduce using rule 52 (expr -> expr OR expr .)
+    ELSE            reduce using rule 52 (expr -> expr OR expr .)
+    RPAREN          reduce using rule 52 (expr -> expr OR expr .)
+    COMMA           reduce using rule 52 (expr -> expr OR expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+
+  ! ADD             [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! SUB             [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! MUL             [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! DIV             [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! EQ              [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! NE              [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! LT              [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! LE              [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! GT              [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! GE              [ reduce using rule 52 (expr -> expr OR expr .) ]
+  ! AND             [ shift and go to state 90 ]
+  ! OR              [ shift and go to state 91 ]
+
+
+state 119
+
+    (54) expr -> LPAREN expr RPAREN .
+
+    ADD             reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    SUB             reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    MUL             reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    DIV             reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    EQ              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    NE              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    LT              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    LE              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    GT              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    GE              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    AND             reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    OR              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    END             reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    INT             reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    PRINT           reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    READ            reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    IDEN            reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    DO              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    CONTINUE        reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    IF              reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    GOTO            reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    RETURN          reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    ENDIF           reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    ELSE            reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+    COMMA           reduce using rule 54 (expr -> LPAREN expr RPAREN .)
+
+
+state 120
+
+    (34) instrucao -> IDEN LPAREN expr RPAREN ASSIGN . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 132
+
+state 121
+
+    (35) instrucao -> DO INT IDEN ASSIGN expr . COMMA expr
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    COMMA           shift and go to state 133
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 122
+
+    (37) instrucao -> IF LPAREN expr RPAREN THEN . instrucoes ENDIF
+    (38) instrucao -> IF LPAREN expr RPAREN THEN . instrucoes ELSE instrucoes ENDIF
+    (22) instrucoes -> . instrucoes instrucao_com_label
+    (23) instrucoes -> . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucoes                     shift and go to state 134
+    instrucao_com_label            shift and go to state 13
+    instrucao                      shift and go to state 18
+
+state 123
+
+    (7) subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN . declaracoes instrucoes END
+    (11) declaracoes -> . declaracoes declaracao
+    (12) declaracoes -> . declaracao
+    (13) declaracao -> . INTEGER lista_ids
+    (14) declaracao -> . REAL lista_ids
+    (15) declaracao -> . LOGICAL lista_ids
+
+    INTEGER         shift and go to state 14
+    REAL            shift and go to state 15
+    LOGICAL         shift and go to state 16
+
+    declaracoes                    shift and go to state 135
+    declaracao                     shift and go to state 12
+
+state 124
+
+    (8) subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN . declaracoes instrucoes END
+    (11) declaracoes -> . declaracoes declaracao
+    (12) declaracoes -> . declaracao
+    (13) declaracao -> . INTEGER lista_ids
+    (14) declaracao -> . REAL lista_ids
+    (15) declaracao -> . LOGICAL lista_ids
+
+    INTEGER         shift and go to state 14
+    REAL            shift and go to state 15
+    LOGICAL         shift and go to state 16
+
+    declaracoes                    shift and go to state 136
+    declaracao                     shift and go to state 12
+
+state 125
+
+    (9) subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes . instrucoes END
+    (11) declaracoes -> declaracoes . declaracao
+    (22) instrucoes -> . instrucoes instrucao_com_label
+    (23) instrucoes -> . instrucao_com_label
+    (13) declaracao -> . INTEGER lista_ids
+    (14) declaracao -> . REAL lista_ids
+    (15) declaracao -> . LOGICAL lista_ids
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    INTEGER         shift and go to state 14
+    REAL            shift and go to state 15
+    LOGICAL         shift and go to state 16
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucoes                     shift and go to state 137
+    declaracao                     shift and go to state 33
+    instrucao_com_label            shift and go to state 13
+    instrucao                      shift and go to state 18
+
+state 126
+
+    (20) lista_ids_simples -> lista_ids_simples COMMA IDEN .
+
+    RPAREN          reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    COMMA           reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    END             reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    INT             reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    PRINT           reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    READ            reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    IDEN            reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    DO              reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    CONTINUE        reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    IF              reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    GOTO            reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    RETURN          reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    ENDIF           reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+    ELSE            reduce using rule 20 (lista_ids_simples -> lista_ids_simples COMMA IDEN .)
+
+
+state 127
+
+    (17) lista_ids -> lista_ids COMMA IDEN LPAREN INT . RPAREN
+
+    RPAREN          shift and go to state 138
+
+
+state 128
+
+    (27) lista_print -> lista_print COMMA elemento_print .
+
+    COMMA           reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    END             reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    INT             reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    PRINT           reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    READ            reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    IDEN            reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    DO              reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    CONTINUE        reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    IF              reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    GOTO            reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    RETURN          reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    ENDIF           reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+    ELSE            reduce using rule 27 (lista_print -> lista_print COMMA elemento_print .)
+
+
+state 129
+
+    (32) instrucao -> READ MUL COMMA IDEN LPAREN expr . RPAREN
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    RPAREN          shift and go to state 139
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 130
+
+    (57) expr -> IDEN LPAREN lista_expr RPAREN .
+
+    ADD             reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    SUB             reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    MUL             reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    DIV             reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    EQ              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    NE              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    LT              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    LE              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    GT              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    GE              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    AND             reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    OR              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    END             reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    INT             reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    PRINT           reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    READ            reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    IDEN            reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    DO              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    CONTINUE        reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    IF              reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    GOTO            reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    RETURN          reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    ENDIF           reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    ELSE            reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    RPAREN          reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+    COMMA           reduce using rule 57 (expr -> IDEN LPAREN lista_expr RPAREN .)
+
+
+state 131
+
+    (58) lista_expr -> lista_expr COMMA . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 140
+
+state 132
+
+    (34) instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    END             reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    INT             reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    PRINT           reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    READ            reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    IDEN            reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    DO              reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    CONTINUE        reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    IF              reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    GOTO            reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    RETURN          reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    ENDIF           reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    ELSE            reduce using rule 34 (instrucao -> IDEN LPAREN expr RPAREN ASSIGN expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 133
+
+    (35) instrucao -> DO INT IDEN ASSIGN expr COMMA . expr
+    (41) expr -> . expr ADD expr
+    (42) expr -> . expr SUB expr
+    (43) expr -> . expr MUL expr
+    (44) expr -> . expr DIV expr
+    (45) expr -> . expr EQ expr
+    (46) expr -> . expr NE expr
+    (47) expr -> . expr LT expr
+    (48) expr -> . expr LE expr
+    (49) expr -> . expr GT expr
+    (50) expr -> . expr GE expr
+    (51) expr -> . expr AND expr
+    (52) expr -> . expr OR expr
+    (53) expr -> . NOT expr
+    (54) expr -> . LPAREN expr RPAREN
+    (55) expr -> . TRUE
+    (56) expr -> . FALSE
+    (57) expr -> . IDEN LPAREN lista_expr RPAREN
+    (60) expr -> . INT
+    (61) expr -> . REAL_NUM
+    (62) expr -> . IDEN
+
+    NOT             shift and go to state 58
+    LPAREN          shift and go to state 59
+    TRUE            shift and go to state 60
+    FALSE           shift and go to state 61
+    IDEN            shift and go to state 56
+    INT             shift and go to state 62
+    REAL_NUM        shift and go to state 63
+
+    expr                           shift and go to state 141
+
+state 134
+
+    (37) instrucao -> IF LPAREN expr RPAREN THEN instrucoes . ENDIF
+    (38) instrucao -> IF LPAREN expr RPAREN THEN instrucoes . ELSE instrucoes ENDIF
+    (22) instrucoes -> instrucoes . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    ENDIF           shift and go to state 142
+    ELSE            shift and go to state 143
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucao_com_label            shift and go to state 35
+    instrucao                      shift and go to state 18
+
+state 135
+
+    (7) subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes . instrucoes END
+    (11) declaracoes -> declaracoes . declaracao
+    (22) instrucoes -> . instrucoes instrucao_com_label
+    (23) instrucoes -> . instrucao_com_label
+    (13) declaracao -> . INTEGER lista_ids
+    (14) declaracao -> . REAL lista_ids
+    (15) declaracao -> . LOGICAL lista_ids
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    INTEGER         shift and go to state 14
+    REAL            shift and go to state 15
+    LOGICAL         shift and go to state 16
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucoes                     shift and go to state 144
+    declaracao                     shift and go to state 33
+    instrucao_com_label            shift and go to state 13
+    instrucao                      shift and go to state 18
+
+state 136
+
+    (8) subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes . instrucoes END
+    (11) declaracoes -> declaracoes . declaracao
+    (22) instrucoes -> . instrucoes instrucao_com_label
+    (23) instrucoes -> . instrucao_com_label
+    (13) declaracao -> . INTEGER lista_ids
+    (14) declaracao -> . REAL lista_ids
+    (15) declaracao -> . LOGICAL lista_ids
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    INTEGER         shift and go to state 14
+    REAL            shift and go to state 15
+    LOGICAL         shift and go to state 16
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucoes                     shift and go to state 145
+    declaracao                     shift and go to state 33
+    instrucao_com_label            shift and go to state 13
+    instrucao                      shift and go to state 18
+
+state 137
+
+    (9) subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes . END
+    (22) instrucoes -> instrucoes . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    END             shift and go to state 146
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucao_com_label            shift and go to state 35
+    instrucao                      shift and go to state 18
+
+state 138
+
+    (17) lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .
+
+    COMMA           reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    INTEGER         reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    REAL            reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    LOGICAL         reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    INT             reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    PRINT           reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    READ            reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    IDEN            reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    DO              reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    CONTINUE        reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    IF              reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    GOTO            reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+    RETURN          reduce using rule 17 (lista_ids -> lista_ids COMMA IDEN LPAREN INT RPAREN .)
+
+
+state 139
+
+    (32) instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .
+
+    END             reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    INT             reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    PRINT           reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    READ            reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    IDEN            reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    DO              reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    CONTINUE        reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    IF              reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    GOTO            reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    RETURN          reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    ENDIF           reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+    ELSE            reduce using rule 32 (instrucao -> READ MUL COMMA IDEN LPAREN expr RPAREN .)
+
+
+state 140
+
+    (58) lista_expr -> lista_expr COMMA expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    RPAREN          reduce using rule 58 (lista_expr -> lista_expr COMMA expr .)
+    COMMA           reduce using rule 58 (lista_expr -> lista_expr COMMA expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 141
+
+    (35) instrucao -> DO INT IDEN ASSIGN expr COMMA expr .
+    (41) expr -> expr . ADD expr
+    (42) expr -> expr . SUB expr
+    (43) expr -> expr . MUL expr
+    (44) expr -> expr . DIV expr
+    (45) expr -> expr . EQ expr
+    (46) expr -> expr . NE expr
+    (47) expr -> expr . LT expr
+    (48) expr -> expr . LE expr
+    (49) expr -> expr . GT expr
+    (50) expr -> expr . GE expr
+    (51) expr -> expr . AND expr
+    (52) expr -> expr . OR expr
+
+    END             reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    INT             reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    PRINT           reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    READ            reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    IDEN            reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    DO              reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    CONTINUE        reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    IF              reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    GOTO            reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    RETURN          reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    ENDIF           reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    ELSE            reduce using rule 35 (instrucao -> DO INT IDEN ASSIGN expr COMMA expr .)
+    ADD             shift and go to state 80
+    SUB             shift and go to state 81
+    MUL             shift and go to state 82
+    DIV             shift and go to state 83
+    EQ              shift and go to state 84
+    NE              shift and go to state 85
+    LT              shift and go to state 86
+    LE              shift and go to state 87
+    GT              shift and go to state 88
+    GE              shift and go to state 89
+    AND             shift and go to state 90
+    OR              shift and go to state 91
+
+
+state 142
+
+    (37) instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .
+
+    END             reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    INT             reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    PRINT           reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    READ            reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    IDEN            reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    DO              reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    CONTINUE        reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    IF              reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    GOTO            reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    RETURN          reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    ENDIF           reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+    ELSE            reduce using rule 37 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ENDIF .)
+
+
+state 143
+
+    (38) instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE . instrucoes ENDIF
+    (22) instrucoes -> . instrucoes instrucao_com_label
+    (23) instrucoes -> . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucoes                     shift and go to state 147
+    instrucao_com_label            shift and go to state 13
+    instrucao                      shift and go to state 18
+
+state 144
+
+    (7) subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes . END
+    (22) instrucoes -> instrucoes . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    END             shift and go to state 148
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucao_com_label            shift and go to state 35
+    instrucao                      shift and go to state 18
+
+state 145
+
+    (8) subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes . END
+    (22) instrucoes -> instrucoes . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    END             shift and go to state 149
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucao_com_label            shift and go to state 35
+    instrucao                      shift and go to state 18
+
+state 146
+
+    (9) subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .
+
+    INTEGER         reduce using rule 9 (subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    REAL            reduce using rule 9 (subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    SUBROUTINE      reduce using rule 9 (subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    $end            reduce using rule 9 (subprograma -> SUBROUTINE IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+
+
+state 147
+
+    (38) instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes . ENDIF
+    (22) instrucoes -> instrucoes . instrucao_com_label
+    (24) instrucao_com_label -> . INT instrucao
+    (25) instrucao_com_label -> . instrucao
+    (26) instrucao -> . PRINT MUL COMMA lista_print
+    (31) instrucao -> . READ MUL COMMA lista_ids_simples
+    (32) instrucao -> . READ MUL COMMA IDEN LPAREN expr RPAREN
+    (33) instrucao -> . IDEN ASSIGN expr
+    (34) instrucao -> . IDEN LPAREN expr RPAREN ASSIGN expr
+    (35) instrucao -> . DO INT IDEN ASSIGN expr COMMA expr
+    (36) instrucao -> . CONTINUE
+    (37) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ENDIF
+    (38) instrucao -> . IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF
+    (39) instrucao -> . GOTO INT
+    (40) instrucao -> . RETURN
+
+    ENDIF           shift and go to state 150
+    INT             shift and go to state 17
+    PRINT           shift and go to state 19
+    READ            shift and go to state 20
+    IDEN            shift and go to state 21
+    DO              shift and go to state 22
+    CONTINUE        shift and go to state 23
+    IF              shift and go to state 24
+    GOTO            shift and go to state 25
+    RETURN          shift and go to state 26
+
+    instrucao_com_label            shift and go to state 35
+    instrucao                      shift and go to state 18
+
+state 148
+
+    (7) subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .
+
+    INTEGER         reduce using rule 7 (subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    REAL            reduce using rule 7 (subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    SUBROUTINE      reduce using rule 7 (subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    $end            reduce using rule 7 (subprograma -> INTEGER FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+
+
+state 149
+
+    (8) subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .
+
+    INTEGER         reduce using rule 8 (subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    REAL            reduce using rule 8 (subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    SUBROUTINE      reduce using rule 8 (subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+    $end            reduce using rule 8 (subprograma -> REAL FUNCTION IDEN LPAREN lista_ids_simples RPAREN declaracoes instrucoes END .)
+
+
+state 150
+
+    (38) instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .
+
+    END             reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    INT             reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    PRINT           reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    READ            reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    IDEN            reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    DO              reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    CONTINUE        reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    IF              reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    GOTO            reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    RETURN          reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    ENDIF           reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+    ELSE            reduce using rule 38 (instrucao -> IF LPAREN expr RPAREN THEN instrucoes ELSE instrucoes ENDIF .)
+

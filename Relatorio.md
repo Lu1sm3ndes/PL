@@ -70,22 +70,13 @@ Esta abordagem permite que o analisador descubra em tempo de execução qual o m
 
 ---
 
-## 5. Dificuldades Encontradas
-
-Durante o desenvolvimento, a equipa deparou-se com alguns desafios técnicos:
-
-1. **Operadores Relacionais e Lógicos:** O Fortran utiliza pontos nos operadores (ex: `.EQ.`, `.AND.`). Foi necessário ajustar as expressões regulares no Lexer para garantir que estes não eram confundidos com chamadas de métodos ou identificadores normais.
-2. **A instrução PRINT:** Inicialmente, a gramática não suportava a mistura de strings e variáveis na mesma instrução de impressão. O problema foi resolvido criando uma regra genérica `elemento_print` que aceita ambas as tipologias de forma alternada, convertendo-as numa lista de nós.
-
----
-
 <div style="page-break-after: always;"></div>
 
-## 6. Resultados dos Testes
+## 5. Resultados dos Testes
 
 O compilador foi submetido a testes rigorosos utilizando os ficheiros fornecidos, demonstrando robustez nas várias fases do processo de compilação.
 
-### 6.1. Fase 1: Reconhecimento Sintático (Parser)
+### 5.1. Fase 1: Reconhecimento Sintático (Parser)
 
 Para comprovar a cobertura da nossa gramática, submetemos os ficheiros de teste mais complexos (Exemplo 4 com Arrays e Exemplo 5 com Subprogramas). O compilador conseguiu reconhecer e identificar todas as instruções e blocos sem emitir qualquer erro de sintaxe:
 
@@ -93,7 +84,7 @@ Para comprovar a cobertura da nossa gramática, submetemos os ficheiros de teste
 
 <div style="page-break-after: always;"></div>
 
-### 6.2. Fase 2: Validação Semântica (Fiscal de Tipos) e Tratamento de Erros
+### 5.2. Fase 2: Validação Semântica (Fiscal de Tipos) e Tratamento de Erros
 
 Para testar a robustez da análise semântica e do suporte a Tipagem Implícita (variáveis inferidas pelas letras I-N), provocámos um erro intencional no código Fortran (tentativa de guardar um LOGICAL numa variável numérica). O sistema detetou e bloqueou a compilação com sucesso:
 
@@ -101,8 +92,51 @@ Para testar a robustez da análise semântica e do suporte a Tipagem Implícita 
 
 <div style="page-break-after: always;"></div>
 
-### 6.3. Fase 3: Construção da AST (Estrutura Hierárquica)
+### 5.3. Fase 3: Construção da AST (Estrutura Hierárquica)
 
 Após o reconhecimento e a validação, quando submetido a um código Fortran integralmente correto, o compilador organiza o código em memória e aprova todas as fases de análise. Abaixo apresenta-se a Árvore de Sintaxe Abstrata gerada, evidenciando a correta alocação das declarações de variáveis, blocos de instruções e subprogramas:
 
 ![Árvore de Sintaxe Abstrata](png/print_ast.png)
+
+### 5.4. Fase 4: Geração de Código Máquina (EWVM)
+
+Nesta fase final, o compilador traduz a Árvore de Sintaxe Abstrata (AST) validada para o código máquina da **EWVM (Experimental Web Virtual Machine)**. Esta tradução é realizada percorrendo a árvore através do padrão _Visitor_, onde cada nó da AST emite uma ou mais instruções de pilha.
+
+**Principais mecanismos implementados:**
+
+- **Gestão de Memória Dinâmica:** O compilador distingue variáveis simples de arrays. Enquanto variáveis escalares são inicializadas com `pushi 0`, os arrays são alocados no _Heap_ através da instrução `alloc`, sendo o seu endereço base guardado num ponteiro global.
+- **Controlo de Fluxo:** Implementação de saltos condicionais (`jz`) e incondicionais (`jump`) para suportar estruturas `IF-THEN-ELSE` e ciclos `DO`. As etiquetas (labels) numéricas do Fortran são convertidas em etiquetas simbólicas compatíveis com a VM.
+- **Subprogramas e Funções (Valorização):** Implementação de chamadas de sub-rotinas através de `pusha` e `call`. A passagem de parâmetros é feita através da escrita direta nos endereços de memória das variáveis locais da função antes da execução do salto, garantindo o isolamento de contextos.
+
+Abaixo, apresentamos a prova de execução do **Exemplo 5 (Conversor de Bases)** na máquina virtual, demonstrando o sucesso da gestão de memória e da chamada de funções com passagem de parâmetros:
+
+![Alocação de Memória e Input](png/6_4_1.png)
+
+![Ciclo e Primeiros Resultados](png/6_4_2.png)
+
+![Execução Completa com Cálculo](png/6_4_2.png)
+
+---
+
+### 6. Dificuldades Encontradas
+
+Durante o desenvolvimento, a equipa deparou-se com alguns desafios técnicos:
+
+1. **Operadores Relacionais e Lógicos:** O Fortran utiliza pontos nos operadores (ex: `.EQ.`, `.AND.`). Foi necessário ajustar as expressões regulares no Lexer para garantir que estes não eram confundidos com chamadas de métodos ou identificadores normais.
+2. **A instrução PRINT:** Inicialmente, a gramática não suportava a mistura de strings e variáveis na mesma instrução de impressão. O problema foi resolvido criando uma regra genérica `elemento_print` que aceita ambas as tipologias de forma alternada, convertendo-as numa lista de nós.
+
+A implementação da geração de código para a EWVM apresentou desafios técnicos significativos, nomeadamente:
+
+1. **Ambiguidade Sintática (Arrays vs. Funções):** Em Fortran 77, a sintaxe para aceder a um array `NUMS(I)` e chamar uma função `CONVRT(NUM)` é idêntica. Para resolver isto, implementámos um "Pre-Pass" no compilador que consulta a tabela de símbolos e rastreia o ficheiro à procura de declarações de funções antes da geração. Se o identificador estiver registado como uma sub-rotina, o código gera uma passagem de parâmetros seguida de `call`; caso contrário, trata-o como um acesso a memória estruturada (`loadn`/`storen`).
+2. **Ordem de Operandos na Pilha:** A instrução `storen` da EWVM exige uma ordem de operandos estrita: `[Endereço, Índice, Valor]`. Garantir que a árvore era percorrida de modo a colocar o valor no topo da pilha apenas _após_ o cálculo do endereço base e do deslocamento foi crucial para evitar erros críticos na máquina virtual (_Illegal Operand: element not Address_).
+3. **Inicialização de Memória e Contextos:** Descobrimos que a VM necessita que o espaço na pilha global (`gp`) seja explicitamente reservado antes de ser utilizado. Implementámos uma fase de "Reserva de Espaço" no arranque do programa que prepara a pilha com `pushi 0` para receber tanto valores imediatos como ponteiros do _Heap_. A gestão da passagem de argumentos exigiu também o mapeamento correto entre os `args` da chamada e os `params` da função declarada.
+
+---
+
+### 7. Conclusão e Valorização
+
+O compilador desenvolvido cumpre integralmente todos os requisitos propostos para a unidade curricular, demonstrando robustez no processamento de algoritmos complexos e gestão de dados. Como fatores de **valorização**, destacamos:
+
+- **Suporte Total a Subprogramas:** O compilador gere de forma robusta a definição, a passagem de argumentos reais para parâmetros formais e o retorno de valores em `FUNCTION` e `SUBROUTINE`.
+- **Gestão de Arrays Avançada:** A utilização de memória estruturada via `alloc` permite a manipulação de vetores de forma segura, contornando as limitações de parsing da linguagem original.
+- **Tratamento de Erros Semânticos:** O sistema de validação (Fiscal Semântico) garante a integridade dos dados e impede a execução de código logicamente inconsistente muito antes da fase de geração.

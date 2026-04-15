@@ -4,6 +4,7 @@ LOGICAL ISPRIM
 PRINT *, 'Introduza um numero inteiro positivo:'
 READ *, NUM
 ISPRIM = .TRUE.
+
 I = 2
 20 IF (I .LE. (NUM/2) .AND. ISPRIM) THEN
     IF (MOD(NUM, I) .EQ. 0) THEN
@@ -13,8 +14,8 @@ I = 2
     GOTO 20
 ENDIF
 IF (ISPRIM) THEN
-    PRINT *, NUM, ' e um numero primo'
+    PRINT *, NUM, ' é um numero primo'
 ELSE
-    PRINT *, NUM, ' nao e um numero primo'
+    PRINT *, NUM, ' não é um numero primo'
 ENDIF
 END

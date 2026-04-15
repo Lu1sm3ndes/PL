@@ -1,0 +1,131 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'NUM'
+pushi 0
+// Reserva gp[1] para 'RESULT'
+pushi 0
+// Reserva gp[2] para 'BASE'
+pushi 0
+// Reserva gp[3] para 'N'
+pushi 0
+// Reserva gp[4] para 'B'
+pushi 0
+// Reserva gp[5] para 'QUOT'
+pushi 0
+// Reserva gp[6] para 'REM'
+pushi 0
+// Reserva gp[7] para 'POT'
+pushi 0
+// Reserva gp[8] para 'VAL'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushs "INTRODUZA UM NUMERO DECIMAL INTEIRO:"
+writes
+writeln
+read
+atoi
+// Guardar NUM
+storeg 0
+pushi 2
+storeg 2
+DOSTART10:
+pushg 2
+pushi 9
+sup
+not
+jz DOEND10
+// Ler NUM
+pushg 0
+// Argumento -> N
+storeg 3
+// Ler BASE
+pushg 2
+// Argumento -> B
+storeg 4
+pusha CONVRT
+call
+// Retorno de CONVRT
+pushg 9
+// Guardar RESULT
+storeg 1
+pushs "BASE"
+writes
+// Ler BASE
+pushg 2
+writei
+pushs ":"
+writes
+// Ler RESULT
+pushg 1
+writei
+writeln
+L10:
+pushg 2
+pushi 1
+add
+storeg 2
+jump DOSTART10
+DOEND10:
+stop
+
+// --- SUBPROGRAMAS ---
+
+CONVRT:
+pushi 0
+// Guardar VAL
+storeg 8
+pushi 1
+// Guardar POT
+storeg 7
+// Ler N
+pushg 3
+// Guardar QUOT
+storeg 5
+L20:
+// Ler QUOT
+pushg 5
+pushi 0
+sup
+jz ELSE0
+// Ler QUOT
+pushg 5
+// Ler B
+pushg 4
+mod
+// Guardar REM
+storeg 6
+// Ler VAL
+pushg 8
+// Ler REM
+pushg 6
+// Ler POT
+pushg 7
+mul
+add
+// Guardar VAL
+storeg 8
+// Ler QUOT
+pushg 5
+// Ler B
+pushg 4
+div
+// Guardar QUOT
+storeg 5
+// Ler POT
+pushg 7
+pushi 10
+mul
+// Guardar POT
+storeg 7
+jump L20
+jump ENDIF0
+ELSE0:
+ENDIF0:
+// Ler VAL
+pushg 8
+// Guardar CONVRT
+storeg 9
+return

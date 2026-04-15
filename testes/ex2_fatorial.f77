@@ -6,5 +6,5 @@ FAT = 1
 DO 10 I = 1, N
     FAT = FAT * I
 10 CONTINUE
-PRINT *, 'Fatorial de', N, ':', FAT
+PRINT *, 'Fatorial de ', N, ': ', FAT
 END

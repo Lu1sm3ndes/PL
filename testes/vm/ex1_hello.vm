@@ -1,0 +1,8 @@
+// --- DECLARACAO DE VARIAVEIS ---
+
+
+start
+pushs "ola, Mundo!"
+writes
+writeln
+stop

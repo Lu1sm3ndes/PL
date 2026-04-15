@@ -1,0 +1,77 @@
+// --- DECLARACAO DE VARIAVEIS ---
+
+// Variavel 'NUM' (Endereco 0)
+pushi 0
+// Variavel 'I' (Endereco 1)
+pushi 0
+// Variavel 'ISPRIM' (Endereco 2)
+pushi 0
+
+start
+pushs "Introduza um numero inteiro positivo:"
+writes
+writeln
+read
+atoi
+storeg 0
+pushi 1
+// Atribuir a ISPRIM
+storeg 2
+pushi 2
+// Atribuir a I
+storeg 1
+L20:
+// Ler I
+pushg 1
+// Ler NUM
+pushg 0
+pushi 2
+div
+infeq
+// Ler ISPRIM
+pushg 2
+and
+jz ELSE0
+// Ler NUM
+pushg 0
+// Ler I
+pushg 1
+mod
+pushi 0
+equal
+jz ELSE1
+pushi 0
+// Atribuir a ISPRIM
+storeg 2
+jump ENDIF1
+ELSE1:
+ENDIF1:
+// Ler I
+pushg 1
+pushi 1
+add
+// Atribuir a I
+storeg 1
+jump L20
+jump ENDIF0
+ELSE0:
+ENDIF0:
+// Ler ISPRIM
+pushg 2
+jz ELSE2
+// Ler NUM
+pushg 0
+writei
+pushs " é um numero primo."
+writes
+writeln
+jump ENDIF2
+ELSE2:
+// Ler NUM
+pushg 0
+writei
+pushs " não é um numero primo."
+writes
+writeln
+ENDIF2:
+stop

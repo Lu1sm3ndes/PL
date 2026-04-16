@@ -1,0 +1,56 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'I'
+pushi 0
+// Reserva gp[1] para 'J'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushs "Coordenadas da Matriz 3x2:"
+writes
+writeln
+pushi 1
+storeg 0
+DOSTART10:
+pushg 0
+pushi 3
+sup
+not
+jz DOEND10
+pushi 1
+storeg 1
+DOSTART20:
+pushg 1
+pushi 2
+sup
+not
+jz DOEND20
+pushs "Linha "
+writes
+// Ler I
+pushg 0
+writei
+pushs " Coluna "
+writes
+// Ler J
+pushg 1
+writei
+writeln
+pushg 1
+pushi 1
+add
+storeg 1
+jump DOSTART20
+DOEND20:
+pushg 0
+pushi 1
+add
+storeg 0
+jump DOSTART10
+DOEND10:
+pushs "Fim da Matriz!"
+writes
+writeln
+stop

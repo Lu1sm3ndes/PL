@@ -1,0 +1,75 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'TERMOS'
+pushi 0
+// Reserva gp[1] para 'T1'
+pushi 0
+// Reserva gp[2] para 'T2'
+pushi 0
+// Reserva gp[3] para 'PROX'
+pushi 0
+// Reserva gp[4] para 'I'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushs "Quantos termos da serie de Fibonacci pretende ver?"
+writes
+writeln
+read
+atoi
+// Guardar TERMOS
+storeg 0
+pushi 0
+// Guardar T1
+storeg 1
+pushi 1
+// Guardar T2
+storeg 2
+pushs "Serie:"
+writes
+writeln
+// Ler T1
+pushg 1
+writei
+writeln
+// Ler T2
+pushg 2
+writei
+writeln
+pushi 3
+storeg 4
+DOSTART10:
+pushg 4
+// Ler TERMOS
+pushg 0
+sup
+not
+jz DOEND10
+// Ler T1
+pushg 1
+// Ler T2
+pushg 2
+add
+// Guardar PROX
+storeg 3
+// Ler PROX
+pushg 3
+writei
+writeln
+// Ler T2
+pushg 2
+// Guardar T1
+storeg 1
+// Ler PROX
+pushg 3
+// Guardar T2
+storeg 2
+pushg 4
+pushi 1
+add
+storeg 4
+jump DOSTART10
+DOEND10:
+stop

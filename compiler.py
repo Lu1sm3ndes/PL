@@ -1,4 +1,5 @@
 # compiler.py
+from ast import stmt
 import re
 from ast_nodes import *
 
@@ -127,7 +128,8 @@ class Compiler:
 
         self.emit("\nstart")
         for stmt in node.body:
-            if getattr(stmt, 'label', None): self.emit(f"L{stmt.label}:")
+            if getattr(stmt, 'label', None) and stmt.label not in self.do_loops:
+                self.emit(f"L{stmt.label}:")
             self.visit(stmt)
         self.emit("stop")
 
@@ -295,7 +297,8 @@ class Compiler:
         self.emit(f"\n{node.name}:")
         for s in node.body:
             # IMPRIME A LABEL NA FUNÇÃO! (Corrige o Grammar Error L20)
-            if getattr(s, 'label', None): self.emit(f"L{s.label}:")
+            if getattr(s, 'label', None) and s.label not in self.do_loops:
+                self.emit(f"L{s.label}:")
             self.visit(s)
 
     def visit_ReturnNode(self, node):

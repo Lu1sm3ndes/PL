@@ -1,11 +1,13 @@
-// --- DECLARACAO DE VARIAVEIS ---
+// --- DECLARACAO DE ESPACO NA PILHA ---
 
-// Variavel 'N' (Endereco 0)
+// Reserva gp[0] para 'N'
 pushi 0
-// Variavel 'I' (Endereco 1)
+// Reserva gp[1] para 'I'
 pushi 0
-// Variavel 'FAT' (Endereco 2)
+// Reserva gp[2] para 'FAT'
 pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
 
 start
 pushs "Introduza um numero inteiro positivo:"
@@ -13,12 +15,12 @@ writes
 writeln
 read
 atoi
+// Guardar N
 storeg 0
 pushi 1
-// Atribuir a FAT
+// Guardar FAT
 storeg 2
 pushi 1
-// Inicia DO loop (I)
 storeg 1
 DOSTART10:
 pushg 1
@@ -26,18 +28,14 @@ pushg 1
 pushg 0
 sup
 not
-// Sai se ultrapassar o fim
 jz DOEND10
 // Ler FAT
 pushg 2
 // Ler I
 pushg 1
 mul
-// Atribuir a FAT
+// Guardar FAT
 storeg 2
-L10:
-// --- Fim do DO I ---
-
 pushg 1
 pushi 1
 add

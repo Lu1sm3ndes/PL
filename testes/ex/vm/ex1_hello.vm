@@ -1,0 +1,10 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushs "ola, Mundo!"
+writes
+writeln
+stop

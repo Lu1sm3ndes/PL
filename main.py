@@ -53,6 +53,18 @@ def run_compiler():
                 else:
                     print("✅ Análise Semântica BEM SUCEDIDA: Tipos e variáveis validados a 100%!")
                     
+                    # --- NOVA ETAPA: OTIMIZAÇÃO DA AST ---
+                    from optimizer import Optimizer
+                    
+                    print("\n--- A otimizar a Árvore de Sintaxe (AST) ---")
+                    otimizador = Optimizer()
+                    ast = otimizador.optimize(ast)
+                    print("⚡ Otimização concluída: Constant Folding e Eliminação de Código Morto aplicados!")
+                    
+                    # Se quiseres ver a árvore otimizada no terminal para comparar, descomenta as 2 linhas abaixo:
+                    # print("\nEstrutura da Árvore Otimizada:")
+                    # print_ast(ast)
+                    
                     # --- ETAPA 4: GERAÇÃO DE CÓDIGO (EWVM) ---
                     from compiler import Compiler
                     

@@ -1,0 +1,53 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'IDADE'
+pushi 0
+// Reserva gp[1] para 'MAIOR'
+pushi 0
+// Reserva gp[2] para 'MENOR'
+pushi 0
+// Reserva gp[3] para 'ATIVO'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushs "Introduza a sua idade:"
+writes
+writeln
+read
+atoi
+// Guardar IDADE
+storeg 0
+// Ler IDADE
+pushg 0
+pushi 18
+supeq
+// Guardar MAIOR
+storeg 1
+// Ler IDADE
+pushg 0
+pushi 65
+inf
+// Guardar MENOR
+storeg 2
+// Ler MAIOR
+pushg 1
+// Ler MENOR
+pushg 2
+and
+// Guardar ATIVO
+storeg 3
+// Ler ATIVO
+pushg 3
+jz ELSE0
+pushs "A pessoa é um adulto em idade ativa!"
+writes
+writeln
+jump ENDIF0
+ELSE0:
+pushs "A pessoa é dependente ou reformada."
+writes
+writeln
+ENDIF0:
+stop

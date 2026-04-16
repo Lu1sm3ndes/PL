@@ -1,0 +1,38 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'N'
+pushi 0
+// Reserva gp[1] para 'RESTO'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushs "Introduza um número:"
+writes
+writeln
+read
+atoi
+// Guardar N
+storeg 0
+// Ler N
+pushg 0
+pushi 2
+mod
+// Guardar RESTO
+storeg 1
+// Ler RESTO
+pushg 1
+pushi 0
+equal
+jz ELSE0
+pushs "O número é PAR."
+writes
+writeln
+jump ENDIF0
+ELSE0:
+pushs "O número é IMPAR."
+writes
+writeln
+ENDIF0:
+stop

@@ -1,0 +1,15 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'X'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushi 15
+// Guardar X
+storeg 0
+pushs "Isto vai ser impresso!"
+writes
+writeln
+stop

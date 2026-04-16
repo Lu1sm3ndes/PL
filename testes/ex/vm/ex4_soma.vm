@@ -47,7 +47,6 @@ loadn
 add
 // Guardar SOMA
 storeg 2
-L30:
 pushg 1
 pushi 1
 add

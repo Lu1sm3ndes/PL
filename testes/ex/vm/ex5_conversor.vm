@@ -62,7 +62,6 @@ writes
 pushg 1
 writei
 writeln
-L10:
 pushg 2
 pushi 1
 add

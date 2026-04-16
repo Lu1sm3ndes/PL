@@ -62,7 +62,7 @@ O projeto inclui os 5 exemplos oficiais do guião e testes adicionais de robuste
 
 ### Autores
 
-António Luís Braga Mendes - A84675
+António Luís Braga Mendes A84675
 
 [Nome 2] - [Número]
 

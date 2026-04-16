@@ -60,9 +60,9 @@ O projeto inclui os 5 exemplos oficiais do guião e testes adicionais de robuste
 
 - `par_impar.f77`: Teste funcional simples utilizando a função intrínseca `MOD` e estruturas condicionais `IF-THEN-ELSE` para validação de lógica modular.
 
-👥 Autores
+### Autores
 
-[Nome 1] - [Número]
+António Luís Braga Mendes - A84675
 
 [Nome 2] - [Número]
 

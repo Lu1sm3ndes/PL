@@ -15,7 +15,10 @@ def p_programa(p):
     '''programa : bloco_principal lista_subprogramas
                 | bloco_principal'''
     if len(p) == 3:
-        p[0] = ProgramNode(p[1].name, p[1].body, p[2])
+        # Em vez de criar um nó novo e perder as declarações,
+        # agarramos no bloco_principal que já tem tudo e apenas lhe colamos os subprogramas!
+        p[1].subprograms = p[2]
+        p[0] = p[1]
     else:
         p[0] = p[1]
     print("\n🏆 AST CONSTRUÍDA: Estrutura pronta para análise semântica!")

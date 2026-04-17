@@ -27,7 +27,7 @@ storeg 1
 pushi 1
 // Guardar T2
 storeg 2
-pushs "Serie:"
+pushs "Série:"
 writes
 writeln
 // Ler T1

@@ -1,0 +1,258 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'ARR'
+pushi 0
+// Reserva gp[1] para 'I'
+pushi 0
+// Reserva gp[2] para 'J'
+pushi 0
+// Reserva gp[3] para 'TEMP'
+pushi 0
+// Reserva gp[4] para 'LIMITE'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+// Aloca Array 'ARR'
+alloc 5
+storeg 0
+
+start
+// Address array ARR
+pushg 0
+pushi 1
+pushi 1
+sub
+pushi 40
+storen
+// Address array ARR
+pushg 0
+pushi 2
+pushi 1
+sub
+pushi 10
+storen
+// Address array ARR
+pushg 0
+pushi 3
+pushi 1
+sub
+pushi 50
+storen
+// Address array ARR
+pushg 0
+pushi 4
+pushi 1
+sub
+pushi 20
+storen
+// Address array ARR
+pushg 0
+pushi 5
+pushi 1
+sub
+pushi 30
+storen
+pushs "--- BUBBLE SORT EM FORTRAN ---"
+writes
+writeln
+pushs "ARRAY INICIAL: [ "
+writes
+// Ler array ARR
+pushg 0
+pushi 1
+pushi 1
+sub
+loadn
+writei
+pushs ", "
+writes
+// Ler array ARR
+pushg 0
+pushi 2
+pushi 1
+sub
+loadn
+writei
+pushs ", "
+writes
+// Ler array ARR
+pushg 0
+pushi 3
+pushi 1
+sub
+loadn
+writei
+pushs ", "
+writes
+// Ler array ARR
+pushg 0
+pushi 4
+pushi 1
+sub
+loadn
+writei
+pushs ", "
+writes
+// Ler array ARR
+pushg 0
+pushi 5
+pushi 1
+sub
+loadn
+writei
+pushs " ]"
+writes
+writeln
+pushs " "
+writes
+writeln
+pushs "A ORDENAR O ARRAY..."
+writes
+writeln
+pushs " "
+writes
+writeln
+pushi 1
+storeg 1
+DOSTART10:
+pushg 1
+pushi 4
+sup
+not
+jz DOEND10
+pushi 5
+// Ler I
+pushg 1
+sub
+// Guardar LIMITE
+storeg 4
+pushi 1
+storeg 2
+DOSTART20:
+pushg 2
+// Ler LIMITE
+pushg 4
+sup
+not
+jz DOEND20
+// Ler array ARR
+pushg 0
+// Ler J
+pushg 2
+pushi 1
+sub
+loadn
+// Ler array ARR
+pushg 0
+// Ler J
+pushg 2
+pushi 1
+add
+pushi 1
+sub
+loadn
+sup
+jz ELSE0
+// Ler array ARR
+pushg 0
+// Ler J
+pushg 2
+pushi 1
+sub
+loadn
+// Guardar TEMP
+storeg 3
+// Address array ARR
+pushg 0
+// Ler J
+pushg 2
+pushi 1
+sub
+// Ler array ARR
+pushg 0
+// Ler J
+pushg 2
+pushi 1
+add
+pushi 1
+sub
+loadn
+storen
+// Address array ARR
+pushg 0
+// Ler J
+pushg 2
+pushi 1
+add
+pushi 1
+sub
+// Ler TEMP
+pushg 3
+storen
+jump ENDIF0
+ELSE0:
+ENDIF0:
+pushg 2
+pushi 1
+add
+storeg 2
+jump DOSTART20
+DOEND20:
+pushg 1
+pushi 1
+add
+storeg 1
+jump DOSTART10
+DOEND10:
+pushs "--- RESULTADO ---"
+writes
+writeln
+pushs "ARRAY ORDENADO: [ "
+writes
+// Ler array ARR
+pushg 0
+pushi 1
+pushi 1
+sub
+loadn
+writei
+pushs ", "
+writes
+// Ler array ARR
+pushg 0
+pushi 2
+pushi 1
+sub
+loadn
+writei
+pushs ", "
+writes
+// Ler array ARR
+pushg 0
+pushi 3
+pushi 1
+sub
+loadn
+writei
+pushs ", "
+writes
+// Ler array ARR
+pushg 0
+pushi 4
+pushi 1
+sub
+loadn
+writei
+pushs ", "
+writes
+// Ler array ARR
+pushg 0
+pushi 5
+pushi 1
+sub
+loadn
+writei
+pushs " ]"
+writes
+writeln
+stop

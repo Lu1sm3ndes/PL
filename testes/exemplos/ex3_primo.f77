@@ -14,8 +14,8 @@ I = 2
     GOTO 20
 ENDIF
 IF (ISPRIM) THEN
-    PRINT *, NUM, ' é um numero primo'
+    PRINT *, NUM, ' é um numero primo.'
 ELSE
-    PRINT *, NUM, ' não é um numero primo'
+    PRINT *, NUM, ' não é um numero primo.'
 ENDIF
 END

@@ -1,4 +1,3 @@
-# compiler.py
 import re
 from ast_nodes import *
 
@@ -11,13 +10,12 @@ class Compiler:
         self.if_counter = 0
         self.do_loops = {}
 
-        if symbol_table:
-            for var_name, info in symbol_table.items():
-                self._register_var(var_name, info)
+    def _get_pure_name(self, text):
+        return str(text).split('(')[0].split('[')[0].strip().upper()
 
     def _parse_name_size(self, text):
         text = str(text)
-        base_name = text.split('(')[0].split('[')[0].strip().upper()
+        base_name = self._get_pure_name(text)
         match = re.search(r'[\[\(](\d+)[\]\)]', text)
         size = int(match.group(1)) if match else 1
         return base_name, size
@@ -59,7 +57,8 @@ class Compiler:
     def register_subs(self, node):
         if node is None: return
         if node.__class__.__name__ == 'SubroutineNode':
-            self.subroutines[self._extract_name(node.name)] = getattr(node, 'params', [])
+            pure_name = self._get_pure_name(node.name)
+            self.subroutines[pure_name] = getattr(node, 'params', [])
         if hasattr(node, '__dict__'):
             for v in node.__dict__.values():
                 if isinstance(v, list):
@@ -75,20 +74,6 @@ class Compiler:
             info = self._register_var(node.name)
             if hasattr(node, 'size') and node.size:
                 info['size'] = max(info['size'], int(node.size))
-                
-        elif t == 'CallNode':
-            base_name = self._extract_name(node)
-            if base_name != 'MOD' and base_name not in self.subroutines:
-                info = self._info(base_name)
-                if info['size'] == 1: info['size'] = 50
-                
-        elif t in ['ReadNode', 'AssignNode']:
-            var_node = getattr(node, 'var', None)
-            if var_node and var_node.__class__.__name__ == 'CallNode':
-                base_name = self._extract_name(var_node)
-                if base_name != 'MOD' and base_name not in self.subroutines:
-                    info = self._info(base_name)
-                    if info['size'] == 1: info['size'] = 50
 
         if hasattr(node, '__dict__'):
             for v in node.__dict__.values():
@@ -122,7 +107,7 @@ class Compiler:
                 self.emit(f"storeg {info['addr']}")
 
         self.emit("\nstart")
-        for stmt in node.body:
+        for stmt in getattr(node, 'body', []):
             if getattr(stmt, 'label', None) and stmt.label not in self.do_loops:
                 self.emit(f"L{stmt.label}:")
             self.visit(stmt)
@@ -230,9 +215,9 @@ class Compiler:
     def visit_IfNode(self, node):
         c = self.if_counter; self.if_counter += 1
         self.visit(node.condition); self.emit(f"jz ELSE{c}")
-        for s in node.then_block: self.visit(s)
+        for s in getattr(node, 'then_block', []): self.visit(s)
         self.emit(f"jump ENDIF{c}\nELSE{c}:")
-        if node.else_block:
+        if getattr(node, 'else_block', None):
             for s in node.else_block: self.visit(s)
         self.emit(f"ENDIF{c}:")
 
@@ -258,8 +243,8 @@ class Compiler:
         self.emit(f"jump L{node.target}")
 
     def visit_CallNode(self, node):
-        base_name = self._extract_name(node)
-        if base_name == 'MOD' and len(node.args) == 2:
+        base_name = self._get_pure_name(node.name)
+        if base_name == 'MOD' and len(getattr(node, 'args', [])) == 2:
             self.visit(node.args[0]); self.visit(node.args[1]); self.emit("mod")
         else:
             info = self._info(base_name)
@@ -275,15 +260,16 @@ class Compiler:
                     param_info = self._info(param_name)
                     self.emit(f"storeg {param_info['addr']}", f"Argumento -> {param_name}")
                 
-                self.emit(f"pusha {node.name}")
+                self.emit(f"pusha {base_name}")
                 self.emit("call")
                 
                 if base_name in self.var_info:
                     self.emit(f"pushg {info['addr']}", f"Retorno de {base_name}")
 
     def visit_SubroutineNode(self, node):
-        self.emit(f"\n{node.name}:")
-        for s in node.body:
+        raw_name = self._get_pure_name(node.name)
+        self.emit(f"\n{raw_name}:")
+        for s in getattr(node, 'body', []):
             if getattr(s, 'label', None) and s.label not in self.do_loops:
                 self.emit(f"L{s.label}:")
             self.visit(s)

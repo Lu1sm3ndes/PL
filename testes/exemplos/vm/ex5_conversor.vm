@@ -2,23 +2,23 @@
 
 // Reserva gp[0] para 'NUM'
 pushi 0
-// Reserva gp[1] para 'RESULT'
+// Reserva gp[1] para 'BASE'
 pushi 0
-// Reserva gp[2] para 'BASE'
+// Reserva gp[2] para 'RESULT'
 pushi 0
-// Reserva gp[3] para 'N'
+// Reserva gp[3] para 'CONVRT'
 pushi 0
-// Reserva gp[4] para 'B'
+// Reserva gp[4] para 'N'
 pushi 0
-// Reserva gp[5] para 'QUOT'
+// Reserva gp[5] para 'B'
 pushi 0
-// Reserva gp[6] para 'REM'
+// Reserva gp[6] para 'QUOT'
 pushi 0
-// Reserva gp[7] para 'POT'
+// Reserva gp[7] para 'REM'
 pushi 0
-// Reserva gp[8] para 'VAL'
+// Reserva gp[8] para 'POT'
 pushi 0
-// Reserva gp[9] para 'CONVRT'
+// Reserva gp[9] para 'VAL'
 pushi 0
 // --- INICIALIZACAO DE ARRAYS ---
 
@@ -38,9 +38,9 @@ pushg 0
 writei
 writeln
 pushi 2
-storeg 2
+storeg 1
 DOSTART10:
-pushg 2
+pushg 1
 pushi 9
 sup
 not
@@ -48,32 +48,32 @@ jz DOEND10
 // Ler NUM
 pushg 0
 // Argumento -> N
-storeg 3
-// Ler BASE
-pushg 2
-// Argumento -> B
 storeg 4
+// Ler BASE
+pushg 1
+// Argumento -> B
+storeg 5
 pusha CONVRT
 call
 // Retorno de CONVRT
-pushg 9
+pushg 3
 // Guardar RESULT
-storeg 1
+storeg 2
 pushs "BASE"
 writes
 // Ler BASE
-pushg 2
+pushg 1
 writei
 pushs ":"
 writes
 // Ler RESULT
-pushg 1
+pushg 2
 writei
 writeln
-pushg 2
+pushg 1
 pushi 1
 add
-storeg 2
+storeg 1
 jump DOSTART10
 DOEND10:
 stop
@@ -83,56 +83,56 @@ stop
 CONVRT:
 pushi 0
 // Guardar VAL
-storeg 8
+storeg 9
 pushi 1
 // Guardar POT
-storeg 7
+storeg 8
 // Ler N
-pushg 3
+pushg 4
 // Guardar QUOT
-storeg 5
+storeg 6
 L20:
 // Ler QUOT
-pushg 5
+pushg 6
 pushi 0
 sup
 jz ELSE0
 // Ler QUOT
-pushg 5
+pushg 6
 // Ler B
-pushg 4
+pushg 5
 mod
 // Guardar REM
-storeg 6
+storeg 7
 // Ler VAL
-pushg 8
+pushg 9
 // Ler REM
-pushg 6
-// Ler POT
 pushg 7
+// Ler POT
+pushg 8
 mul
 add
 // Guardar VAL
-storeg 8
+storeg 9
 // Ler QUOT
-pushg 5
+pushg 6
 // Ler B
-pushg 4
+pushg 5
 div
 // Guardar QUOT
-storeg 5
+storeg 6
 // Ler POT
-pushg 7
+pushg 8
 pushi 10
 mul
 // Guardar POT
-storeg 7
+storeg 8
 jump L20
 jump ENDIF0
 ELSE0:
 ENDIF0:
 // Ler VAL
-pushg 8
+pushg 9
 // Guardar CONVRT
-storeg 9
+storeg 3
 return

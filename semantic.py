@@ -86,7 +86,7 @@ class SemanticAnalyzer:
         base_name = self._extract_name(node.name)
         self.initialized_vars.add(base_name)
         
-        # FISCAL DE ARRAYS: Tentar escrever num array que é escalar
+        # O POLÍCIA VOLTOU!
         if base_name not in self.arrays:
             self.errors.append(f"❌ Erro Semântico: Tentativa de indexar '{base_name}', que é uma variável escalar de tamanho 1.")
             
@@ -96,17 +96,16 @@ class SemanticAnalyzer:
     def visit_CallNode(self, node):
         base_name = self._extract_name(node.name)
         
-        # Se NÃO é uma subrotina registada (nem o MOD), então é um acesso a Array a ser lido
         if base_name != 'MOD' and base_name not in self.subroutines:
-            # FISCAL DE ARRAYS: Tentar ler de um array que é escalar
+            # O POLÍCIA VOLTOU!
             if base_name not in self.arrays:
                 self.errors.append(f"❌ Erro Semântico: Tentativa de indexar '{base_name}', que é uma variável escalar.")
             if base_name not in self.initialized_vars:
                 self.warnings.append(f"⚠️ Aviso: Acesso ao array '{base_name}' que poderá não estar inicializado.")
             return self.get_implicit_type(base_name)
             
-        for arg in node.args: self.visit(arg)
-        return 'INTEGER' 
+        for arg in getattr(node, 'args', []): self.visit(arg)
+        return 'INTEGER'
 
     def visit_ReadNode(self, node):
         base_name = self._extract_name(getattr(node, 'var', getattr(node, 'name', '')))

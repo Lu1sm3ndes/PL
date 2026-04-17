@@ -1,0 +1,248 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'ARR'
+pushi 0
+// Reserva gp[1] para 'N'
+pushi 0
+// Reserva gp[2] para 'I'
+pushi 0
+// Reserva gp[3] para 'J'
+pushi 0
+// Reserva gp[4] para 'TEMP'
+pushi 0
+// Reserva gp[5] para 'LIMITE'
+pushi 0
+// Reserva gp[6] para 'MAXOUT'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+// Aloca Array 'ARR'
+alloc 50
+storeg 0
+
+start
+pushs "--- BUBBLE SORT INTERATIVO ---"
+writes
+writeln
+pushs "QUANTOS NUMEROS QUER ORDENAR? (MAX 50):"
+writes
+writeln
+read
+atoi
+// Guardar N
+storeg 1
+pushs "INTRODUZA OS "
+writes
+// Ler N
+pushg 1
+writei
+pushs " NUMEROS (UM DE CADA VEZ):"
+writes
+writeln
+pushi 1
+storeg 2
+DOSTART10:
+pushg 2
+// Ler N
+pushg 1
+sup
+not
+jz DOEND10
+pushg 0
+// Ler I
+pushg 2
+pushi 1
+sub
+read
+atoi
+storen
+pushg 2
+pushi 1
+add
+storeg 2
+jump DOSTART10
+DOEND10:
+pushs " "
+writes
+writeln
+pushs "--- ESTADO INICIAL ---"
+writes
+writeln
+pushi 1
+storeg 2
+DOSTART15:
+pushg 2
+// Ler N
+pushg 1
+sup
+not
+jz DOEND15
+pushs "Posicao "
+writes
+// Ler I
+pushg 2
+writei
+pushs " : "
+writes
+// Ler array ARR
+pushg 0
+// Ler I
+pushg 2
+pushi 1
+sub
+loadn
+writei
+writeln
+pushg 2
+pushi 1
+add
+storeg 2
+jump DOSTART15
+DOEND15:
+pushs " "
+writes
+writeln
+pushs "A ORDENAR O ARRAY..."
+writes
+writeln
+pushs " "
+writes
+writeln
+// Ler N
+pushg 1
+pushi 1
+sub
+// Guardar MAXOUT
+storeg 6
+pushi 1
+storeg 2
+DOSTART20:
+pushg 2
+// Ler MAXOUT
+pushg 6
+sup
+not
+jz DOEND20
+// Ler N
+pushg 1
+// Ler I
+pushg 2
+sub
+// Guardar LIMITE
+storeg 5
+pushi 1
+storeg 3
+DOSTART30:
+pushg 3
+// Ler LIMITE
+pushg 5
+sup
+not
+jz DOEND30
+// Ler array ARR
+pushg 0
+// Ler J
+pushg 3
+pushi 1
+sub
+loadn
+// Ler array ARR
+pushg 0
+// Ler J
+pushg 3
+pushi 1
+add
+pushi 1
+sub
+loadn
+sup
+jz ELSE0
+// Ler array ARR
+pushg 0
+// Ler J
+pushg 3
+pushi 1
+sub
+loadn
+// Guardar TEMP
+storeg 4
+// Address array ARR
+pushg 0
+// Ler J
+pushg 3
+pushi 1
+sub
+// Ler array ARR
+pushg 0
+// Ler J
+pushg 3
+pushi 1
+add
+pushi 1
+sub
+loadn
+storen
+// Address array ARR
+pushg 0
+// Ler J
+pushg 3
+pushi 1
+add
+pushi 1
+sub
+// Ler TEMP
+pushg 4
+storen
+jump ENDIF0
+ELSE0:
+ENDIF0:
+pushg 3
+pushi 1
+add
+storeg 3
+jump DOSTART30
+DOEND30:
+pushg 2
+pushi 1
+add
+storeg 2
+jump DOSTART20
+DOEND20:
+pushs "--- RESULTADO FINAL ---"
+writes
+writeln
+pushs "ARRAY ORDENADO:"
+writes
+writeln
+pushi 1
+storeg 2
+DOSTART40:
+pushg 2
+// Ler N
+pushg 1
+sup
+not
+jz DOEND40
+pushs "["
+writes
+// Ler I
+pushg 2
+writei
+pushs "] -> "
+writes
+// Ler array ARR
+pushg 0
+// Ler I
+pushg 2
+pushi 1
+sub
+loadn
+writei
+writeln
+pushg 2
+pushi 1
+add
+storeg 2
+jump DOSTART40
+DOEND40:
+stop

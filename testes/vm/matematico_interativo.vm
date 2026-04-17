@@ -1,0 +1,122 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'A'
+pushi 0
+// Reserva gp[1] para 'B'
+pushi 0
+// Reserva gp[2] para 'C'
+pushi 0
+// Reserva gp[3] para 'RES1'
+pushi 0
+// Reserva gp[4] para 'RES2'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushs "--- TESTE INTERATIVO DE PRECEDENCIA MATEMATICA ---"
+writes
+writeln
+pushs "INTRODUZA O VALOR DE A:"
+writes
+writeln
+read
+atoi
+// Guardar A
+storeg 0
+pushs "INTRODUZA O VALOR DE B:"
+writes
+writeln
+read
+atoi
+// Guardar B
+storeg 1
+pushs "INTRODUZA O VALOR DE C (Diferente de zero!):"
+writes
+writeln
+read
+atoi
+// Guardar C
+storeg 2
+pushs " "
+writes
+writeln
+pushs "VALORES ESCOLHIDOS: A = "
+writes
+// Ler A
+pushg 0
+writei
+pushs ", B = "
+writes
+// Ler B
+pushg 1
+writei
+pushs ", C = "
+writes
+// Ler C
+pushg 2
+writei
+writeln
+pushs " "
+writes
+writeln
+// Ler A
+pushg 0
+// Ler B
+pushg 1
+// Ler C
+pushg 2
+mul
+add
+// Ler A
+pushg 0
+// Ler C
+pushg 2
+div
+sub
+// Guardar RES1
+storeg 3
+pushs "TESTE 1: Sem parenteses"
+writes
+writeln
+pushs "CONTA: A + B * C - A / C"
+writes
+writeln
+pushs "OBTIDO:   "
+writes
+// Ler RES1
+pushg 3
+writei
+writeln
+pushs " "
+writes
+writeln
+// Ler A
+pushg 0
+// Ler B
+pushg 1
+add
+// Ler C
+pushg 2
+mul
+// Ler A
+pushg 0
+// Ler C
+pushg 2
+div
+sub
+// Guardar RES2
+storeg 4
+pushs "TESTE 2: Com parenteses"
+writes
+writeln
+pushs "CONTA: (A + B) * C - A / C"
+writes
+writeln
+pushs "OBTIDO:   "
+writes
+// Ler RES2
+pushg 4
+writei
+writeln
+stop

@@ -1,0 +1,116 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'VALOR'
+pushi 0
+// Reserva gp[1] para 'RESULT'
+pushi 0
+// Reserva gp[2] para 'X'
+pushi 0
+// Reserva gp[3] para 'DOBRO'
+pushi 0
+// Reserva gp[4] para 'FUNC2'
+pushi 0
+// Reserva gp[5] para 'Y'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushs "--- TESTE DE STACK ---"
+writes
+writeln
+pushs "MAIN: A iniciar programa..."
+writes
+writeln
+pushi 5
+// Guardar VALOR
+storeg 0
+pushs "MAIN: A chamar FUNC1 com valor: "
+writes
+// Ler VALOR
+pushg 0
+writei
+writeln
+// Ler VALOR
+pushg 0
+// Argumento -> X
+storeg 2
+pusha FUNC1
+call
+// Retorno de FUNC1
+pushg 6
+// Guardar RESULT
+storeg 1
+pushs " "
+writes
+writeln
+pushs "MAIN: De volta ao programa principal!"
+writes
+writeln
+pushs "MAIN: RESULTADO FINAL: "
+writes
+// Ler RESULT
+pushg 1
+writei
+writeln
+pushs "MAIN: (Valor esperado: 20)"
+writes
+writeln
+stop
+
+// --- SUBPROGRAMAS ---
+
+FUNC1:
+pushs "  -> FUNC1: Recebi o valor "
+writes
+// Ler X
+pushg 2
+writei
+writeln
+pushs "  -> FUNC1: A chamar FUNC2 para dobrar o valor..."
+writes
+writeln
+// Ler X
+pushg 2
+// Argumento -> Y
+storeg 5
+pusha FUNC2
+call
+// Retorno de FUNC2
+pushg 4
+// Guardar DOBRO
+storeg 3
+pushs "  -> FUNC1: A FUNC2 devolveu o valor "
+writes
+// Ler DOBRO
+pushg 3
+writei
+writeln
+pushs "  -> FUNC1: A somar 10 ao resultado e a regressar..."
+writes
+writeln
+// Ler DOBRO
+pushg 3
+pushi 10
+add
+// Guardar FUNC1
+storeg 6
+return
+
+FUNC2:
+pushs "    -> FUNC2: Recebi o valor "
+writes
+// Ler Y
+pushg 5
+writei
+writeln
+pushs "    -> FUNC2: A calcular o dobro..."
+writes
+writeln
+// Ler Y
+pushg 5
+pushi 2
+mul
+// Guardar FUNC2
+storeg 4
+return

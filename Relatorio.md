@@ -158,6 +158,7 @@ Para além de garantirmos a correta compilação e execução dos 5 exemplos ofi
 - **Operações Modulares Simples:** O ficheiro `par_impar.f77` valida o comportamento de blocos `IF-THEN-ELSE` básicos em conjunto com funções intrínsecas da linguagem (`MOD`).
 - **Tratamento de Erros ("Caminho Triste"):** Avaliámos a resiliência do compilador face a código mal-formado utilizando os testes `erro_semantico.f77` e `erro_sintatico.f77`. O primeiro tenta somar ilegalmente um valor numérico a uma variável `LOGICAL` (sendo imediatamente bloqueado pelo nosso Fiscal de Tipos), enquanto o segundo omite deliberadamente a keyword `THEN` (sendo apanhado pelo _parser_). Em ambos os casos, a compilação é abortada com segurança, protegendo a máquina virtual de código inválido.
 - **Eficácia da Otimização:** O código `teste_otimizacao.f77` foi construído cirurgicamente com cálculos de literais e um bloco condicional inalcançável (`IF (.TRUE.) ELSE...`). A inspeção do ficheiro `.vm` gerado evidencia o sucesso absoluto do nosso Otimizador, confirmando a aplicação do _Constant Folding_ e do _Dead Code Elimination_.
+- **Passagem de Arrays por Referência (Stress Test):** Desenvolvemos o teste `ex6_stress_array.f77` para levar a arquitetura de memória da EWVM ao limite. Este cenário testa a passagem de um Array (alocado dinamicamente no _Heap_) como argumento para uma `FUNCTION/SUBROUTINE`, que por sua vez modifica os dados diretamente na memória global. O sucesso deste teste valida a correta passagem de ponteiros de memória e o isolamento imaculado dos escopos locais face ao programa principal, evitando qualquer colisão de endereços.
 
 ---
 
@@ -165,9 +166,9 @@ Para além de garantirmos a correta compilação e execução dos 5 exemplos ofi
 
 O compilador desenvolvido cumpre integralmente todos os requisitos propostos para a unidade curricular, demonstrando robustez no processamento de algoritmos complexos e gestão de dados. Como fatores de **valorização**, destacamos:
 
-- **Suporte Total a Subprogramas:** O compilador gere de forma robusta a definição, a passagem de argumentos reais para parâmetros formais e o retorno de valores em `FUNCTION` e `SUBROUTINE`.
 - **Gestão de Arrays Avançada:** A utilização de memória estruturada via `alloc` permite a manipulação de vetores de forma segura, contornando as limitações de parsing da linguagem original.
 - **Tratamento de Erros Semânticos:** O sistema de validação (Fiscal Semântico) garante a integridade dos dados e impede a execução de código logicamente inconsistente muito antes da fase de geração.
-- **Otimização de Código:** Implementação de uma passagem intermédia na AST que aplica _Constant Folding_ e \*Dead Code Elimination, garantindo a geração de código máquina limpo e eficiente.
+- **Otimização de Código:** Implementação de uma passagem intermédia na AST que aplica _Constant Folding_ e _Dead Code Elimination_, garantindo a geração de código máquina limpo e eficiente.
+- **Suporte Total a Subprogramas:** O compilador gere de forma robusta a definição, a passagem de argumentos reais para parâmetros formais (**incluindo a passagem complexa de Arrays por referência**) e o retorno de valores em `FUNCTION` e `SUBROUTINE`, garantindo um isolamento perfeito dos contextos de execução.
 
 ---

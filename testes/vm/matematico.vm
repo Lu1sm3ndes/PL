@@ -1,0 +1,100 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'A'
+pushi 0
+// Reserva gp[1] para 'B'
+pushi 0
+// Reserva gp[2] para 'C'
+pushi 0
+// Reserva gp[3] para 'RES1'
+pushi 0
+// Reserva gp[4] para 'RES2'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+
+start
+pushi 10
+// Guardar A
+storeg 0
+pushi 5
+// Guardar B
+storeg 1
+pushi 2
+// Guardar C
+storeg 2
+pushs "--- TESTE DE PRECEDENCIA MATEMATICA ---"
+writes
+writeln
+pushs "VALORES: A = 10, B = 5, C = 2"
+writes
+writeln
+pushs " "
+writes
+writeln
+// Ler A
+pushg 0
+// Ler B
+pushg 1
+// Ler C
+pushg 2
+mul
+add
+// Ler A
+pushg 0
+// Ler C
+pushg 2
+div
+sub
+// Guardar RES1
+storeg 3
+pushs "TESTE 1: Sem parenteses"
+writes
+writeln
+pushs "CONTA: A + B * C - A / C"
+writes
+writeln
+pushs "ESPERADO: 15"
+writes
+writeln
+pushs "OBTIDO:   "
+writes
+// Ler RES1
+pushg 3
+writei
+writeln
+pushs " "
+writes
+writeln
+// Ler A
+pushg 0
+// Ler B
+pushg 1
+add
+// Ler C
+pushg 2
+mul
+// Ler A
+pushg 0
+// Ler C
+pushg 2
+div
+sub
+// Guardar RES2
+storeg 4
+pushs "TESTE 2: Com parenteses"
+writes
+writeln
+pushs "CONTA: (A + B) * C - A / C"
+writes
+writeln
+pushs "ESPERADO: 25"
+writes
+writeln
+pushs "OBTIDO:   "
+writes
+// Ler RES2
+pushg 4
+writei
+writeln
+stop

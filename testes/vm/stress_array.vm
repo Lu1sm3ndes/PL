@@ -1,0 +1,149 @@
+// --- DECLARACAO DE ESPACO NA PILHA ---
+
+// Reserva gp[0] para 'NUMS'
+pushi 0
+// Reserva gp[1] para 'I'
+pushi 0
+// Reserva gp[2] para 'DUMMY'
+pushi 0
+// Reserva gp[3] para 'MODIF'
+pushi 0
+// Reserva gp[4] para 'ARR'
+pushi 0
+// Reserva gp[5] para 'TAM'
+pushi 0
+// Reserva gp[6] para 'J'
+pushi 0
+// --- INICIALIZACAO DE ARRAYS ---
+
+// Aloca Array 'NUMS'
+alloc 3
+storeg 0
+// Aloca Array 'ARR'
+alloc 3
+storeg 4
+
+start
+pushs "A INICIALIZAR ARRAY NO MAIN..."
+writes
+writeln
+pushi 1
+storeg 1
+DOSTART10:
+pushg 1
+pushi 3
+sup
+not
+jz DOEND10
+// Address array NUMS
+pushg 0
+// Ler I
+pushg 1
+pushi 1
+sub
+// Ler I
+pushg 1
+pushi 10
+mul
+storen
+pushs "MAIN ANTES:"
+writes
+// Ler array NUMS
+pushg 0
+// Ler I
+pushg 1
+pushi 1
+sub
+loadn
+writei
+writeln
+pushg 1
+pushi 1
+add
+storeg 1
+jump DOSTART10
+DOEND10:
+pushs "A CHAMAR FUNCAO PARA MODIFICAR O ARRAY..."
+writes
+writeln
+// Ler NUMS
+pushg 0
+// Argumento -> ARR
+storeg 4
+pushi 3
+// Argumento -> TAM
+storeg 5
+pusha MODIF
+call
+// Retorno de MODIF
+pushg 3
+// Guardar DUMMY
+storeg 2
+pushs "DE VOLTA AO MAIN. RESULTADOS:"
+writes
+writeln
+pushi 1
+storeg 1
+DOSTART20:
+pushg 1
+pushi 3
+sup
+not
+jz DOEND20
+pushs "MAIN DEPOIS:"
+writes
+// Ler array NUMS
+pushg 0
+// Ler I
+pushg 1
+pushi 1
+sub
+loadn
+writei
+writeln
+pushg 1
+pushi 1
+add
+storeg 1
+jump DOSTART20
+DOEND20:
+stop
+
+// --- SUBPROGRAMAS ---
+
+MODIF:
+pushi 1
+storeg 6
+DOSTART30:
+pushg 6
+// Ler TAM
+pushg 5
+sup
+not
+jz DOEND30
+// Address array ARR
+pushg 4
+// Ler J
+pushg 6
+pushi 1
+sub
+// Ler array ARR
+pushg 4
+// Ler J
+pushg 6
+pushi 1
+sub
+loadn
+pushi 2
+mul
+storen
+pushg 6
+pushi 1
+add
+storeg 6
+jump DOSTART30
+DOEND30:
+pushi 1
+// Guardar MODIF
+storeg 3
+return

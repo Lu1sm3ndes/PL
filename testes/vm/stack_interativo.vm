@@ -16,7 +16,7 @@ pushi 0
 
 
 start
-pushs "--- TESTE DE CALL STACK (CHAMADAS EM CADEIA) ---"
+pushs "--- TESTE DE STACKS ---"
 writes
 writeln
 pushs "INTRODUZA UM NUMERO PARA TESTAR AS FUNCOES:"

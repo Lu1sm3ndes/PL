@@ -1,21 +1,26 @@
 // --- DECLARACAO DE ESPACO NA PILHA ---
 
-// Reserva gp[0] para 'NUMS'
+// Reserva gp[0] para 'MAINNUMS'
 pushi 0
-// Reserva gp[1] para 'I'
+// Reserva gp[1] para 'MAINI'
 pushi 0
-// Reserva gp[2] para 'SOMA'
+// Reserva gp[2] para 'MAINSOMA'
+pushi 0
+// Reserva gp[3] para 'MAINMAINNUMS'
 pushi 0
 // --- INICIALIZACAO DE ARRAYS ---
 
-// Aloca Array 'NUMS'
+// Aloca Array 'MAINNUMS'
 alloc 5
 storeg 0
+// Aloca Array 'MAINMAINNUMS'
+alloc 50
+storeg 3
 
 start
 pushi 0
-// Guardar SOMA
-storeg 2
+// Guardar MAINSOMA
+storeg 4
 pushs "Introduza 5 números inteiros, um de cada vez:"
 writes
 writeln
@@ -27,26 +32,26 @@ pushi 5
 sup
 not
 jz DOEND30
-pushg 0
-// Ler I
+pushg 3
+// Ler MAINI
 pushg 1
 pushi 1
 sub
 read
 atoi
 storen
-// Ler SOMA
+// Ler MAINSOMA
 pushg 2
 // Ler array NUMS
 pushg 0
-// Ler I
+// Ler MAINI
 pushg 1
 pushi 1
 sub
 loadn
 add
-// Guardar SOMA
-storeg 2
+// Guardar MAINSOMA
+storeg 4
 pushg 1
 pushi 1
 add
@@ -55,7 +60,7 @@ jump DOSTART30
 DOEND30:
 pushs "A soma dos números é: "
 writes
-// Ler SOMA
+// Ler MAINSOMA
 pushg 2
 writei
 writeln

@@ -1,8 +1,11 @@
 import sys
 import os
 from parser import parser
+from semantic import SemanticAnalyzer
+from optimizer import Optimizer  
+from compiler import Compiler
 
-# Função para desenhar a árvore 🌳
+# Função para desenhar a árvore 🌳 
 def print_ast(node, indent=""):
     if isinstance(node, list):
         for item in node:
@@ -13,10 +16,10 @@ def print_ast(node, indent=""):
         for key, value in node.__dict__.items():
             if key != 'label' and value is not None:
                 if isinstance(value, list) and len(value) == 0:
-                    continue # Esconde listas vazias para ficar mais limpo
+                    continue 
                 print(f"{indent}    |-- {key}: ", end="")
                 if isinstance(value, list) or hasattr(value, '__dict__'):
-                    print() # Quebra a linha
+                    print() 
                     print_ast(value, indent + "        ")
                 else:
                     print(value)
@@ -31,59 +34,51 @@ def run_compiler():
                 conteudo = f.read()
             print(f"--- A iniciar o Compilador para: {filename} ---\n")
             
-            # --- ETAPA 1 e 2: Análise Léxica, Sintática e Construção da AST ---
+            # --- ETAPA 1 e 2: Análise Léxica, Sintática e AST ---
             ast = parser.parse(conteudo)
             
             if ast:
-                print("🏆 AST CONSTRUÍDA COM SUCESSO!\n")
-                print("Estrutura da Árvore de Sintaxe Abstrata:")
+                print("🌳 Árvore Sintática Abstrata (Original):")
                 print_ast(ast)
-                
-                # --- ETAPA 3: ANÁLISE SEMÂNTICA ---
-                from semantic import SemanticAnalyzer
-                
-                print("\n--- A iniciar Análise Semântica ---")
+                print("\n" + "="*50 + "\n")
+
+                # --- ETAPA 3: Análise Semântica ---
                 analisador = SemanticAnalyzer()
-                erros_semanticos = analisador.analyze(ast)
                 
-                if erros_semanticos:
-                    print("\n⚠️ O código tem falhas de lógica (Semântica):")
-                    for erro in erros_semanticos:
-                        print(erro)
+                # A CORREÇÃO MAGNÍFICA ESTÁ AQUI: Desempacotar a tupla!
+                erros, avisos = analisador.analyze(ast)
+                
+                if avisos:
+                    print("⚠️ Avisos Semânticos:")
+                    for aviso in avisos:
+                        print(f"  - {aviso}")
+
+                if erros:
+                    print("\n❌ Erros Semânticos Encontrados:")
+                    for erro in erros:
+                        print(f"  - {erro}")
                 else:
-                    print("✅ Análise Semântica BEM SUCEDIDA: Tipos e variáveis validados a 100%!")
+                    print("\n✅ Análise Semântica BEM SUCEDIDA!")
                     
-                    # --- NOVA ETAPA: OTIMIZAÇÃO DA AST ---
-                    from optimizer import Optimizer
-                    
-                    print("\n--- A otimizar a Árvore de Sintaxe (AST) ---")
+                    # --- ETAPA 4: Otimização (Valorização) ---
+                    print("\n--- A Otimizar a Árvore (Constant Folding & Dead Code) ---")
                     otimizador = Optimizer()
                     ast = otimizador.optimize(ast)
-                    print("⚡ Otimização concluída: Constant Folding e Eliminação de Código Morto aplicados!")
                     
-                    # Se quiseres ver a árvore otimizada no terminal para comparar, descomenta as 2 linhas abaixo:
-                    # print("\nEstrutura da Árvore Otimizada:")
-                    # print_ast(ast)
-                    
-                    # --- ETAPA 4: GERAÇÃO DE CÓDIGO (EWVM) ---
-                    from compiler import Compiler
-                    
-                    print("\n--- A gerar código para a Máquina Virtual (EWVM) ---")
+                    print("🌳 Árvore Sintática (Otimizada):")
+                    print_ast(ast)
+                    print("\n✨ Otimização concluída.")
+
+                    # --- ETAPA 5: Geração de Código VM ---
                     compilador_vm = Compiler(analisador.symbol_table)
                     codigo_gerado = compilador_vm.compile(ast)
                     
-                    # --- LÓGICA DE ORGANIZAÇÃO DE FICHEIROS ---
-                    nome_base = os.path.basename(filename) # Ex: "ex5_conversor.f77"
-                    nome_vm = nome_base.replace('.f77', '.vm') # Ex: "ex5_conversor.vm"
+                    nome_base = os.path.basename(filename)
+                    nome_vm = nome_base.replace('.f77', '.vm')
                     
-                    # Descobre a pasta onde está o ficheiro original (ex: "testes")
-                    pasta_origem = os.path.dirname(filename)
-                    if not pasta_origem: pasta_origem = "."
-                    
-                    # Define a pasta de destino (ex: "testes/vm")
+                    pasta_origem = os.path.dirname(filename) or "."
                     pasta_destino = os.path.join(pasta_origem, "vm")
                     
-                    # Cria a pasta 'vm' se não existir
                     if not os.path.exists(pasta_destino):
                         os.makedirs(pasta_destino)
                         
@@ -93,9 +88,8 @@ def run_compiler():
                         for linha in codigo_gerado:
                             f.write(linha + '\n')
                             
-                    print(f"💾 Código guardado com sucesso em: {out_file}")
-                    print(f"🚀 Abre a Máquina Virtual EWVM, cola o código e clica 'Run'!\n")
-                    
+                    print(f"\n💾 Código guardado com sucesso em: {out_file}")
+                    print(f"🚀 Abre a Máquina Virtual EWVM, cola o código e clica 'Run'!")
             else:
                 print("⚠️ O parser não devolveu nenhuma estrutura.")
                 

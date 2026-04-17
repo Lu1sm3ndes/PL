@@ -1,5 +1,4 @@
 # compiler.py
-from ast import stmt
 import re
 from ast_nodes import *
 
@@ -52,13 +51,11 @@ class Compiler:
         self.instructions.append(ins)
 
     def compile(self, ast):
-        # A MAGIA ESTÁ AQUI: 3 PASSOS RASTREADORES
-        self.register_subs(ast) # Passo 1: Descobre todas as Funções
-        self.pre_pass(ast)      # Passo 2: Caça os falsos Arrays
-        self.visit(ast)         # Passo 3: Gera o Código EWVM
+        self.register_subs(ast)
+        self.pre_pass(ast)      
+        self.visit(ast)         
         return self.instructions
 
-    # --- NOVO: LÊ AS FUNÇÕES ANTES DE TUDO O RESTO ---
     def register_subs(self, node):
         if node is None: return
         if node.__class__.__name__ == 'SubroutineNode':
@@ -89,7 +86,6 @@ class Compiler:
             var_node = getattr(node, 'var', None)
             if var_node and var_node.__class__.__name__ == 'CallNode':
                 base_name = self._extract_name(var_node)
-                # Só diz que é array se NÃO for uma função já registada!
                 if base_name != 'MOD' and base_name not in self.subroutines:
                     info = self._info(base_name)
                     if info['size'] == 1: info['size'] = 50
@@ -114,7 +110,6 @@ class Compiler:
                         if isinstance(i, Node): self.visit(i)
                 elif isinstance(v, Node): self.visit(v)
 
-    # --- 1. PROGRAMA PRINCIPAL ---
     def visit_ProgramNode(self, node):
         self.emit("", "--- DECLARACAO DE ESPACO NA PILHA ---")
         for name, info in sorted(self.var_info.items(), key=lambda x: x[1]['addr']):
@@ -137,7 +132,6 @@ class Compiler:
             self.emit("\n// --- SUBPROGRAMAS ---")
             for sub in node.subprograms: self.visit(sub)
 
-    # --- 2. VALORES E VARIÁVEIS ---
     def visit_LiteralNode(self, node):
         val = 1 if node.value is True else (0 if node.value is False else node.value)
         self.emit(f"pushi {val}")
@@ -149,7 +143,6 @@ class Compiler:
             self.visit(node.index)
             self.emit("pushi 1"); self.emit("sub"); self.emit("loadn")
 
-    # --- 3. ATRIBUIÇÕES ---
     def visit_AssignNode(self, node):
         is_array_call = hasattr(node, 'var') and hasattr(node.var, '__class__') and node.var.__class__.__name__ == 'CallNode'
         
@@ -184,7 +177,6 @@ class Compiler:
         self.visit(node.expr)
         self.emit("storen")
 
-    # --- 4. I/O ---
     def visit_ReadNode(self, node):
         is_array_call = hasattr(node, 'var') and hasattr(node.var, '__class__') and node.var.__class__.__name__ == 'CallNode'
         
@@ -213,7 +205,6 @@ class Compiler:
             self.emit("atoi")
             self.emit(f"storeg {info['addr']}", f"Guardar {base_name}")
 
-    # --- 5. OPERAÇÕES ---
     def visit_BinOpNode(self, node):
         self.visit(node.left)
         self.visit(node.right)
@@ -236,7 +227,6 @@ class Compiler:
                 self.visit(e); self.emit("writei")
         self.emit("writeln")
 
-    # --- 6. FLUXO ---
     def visit_IfNode(self, node):
         c = self.if_counter; self.if_counter += 1
         self.visit(node.condition); self.emit(f"jz ELSE{c}")
@@ -267,7 +257,6 @@ class Compiler:
     def visit_GotoNode(self, node):
         self.emit(f"jump L{node.target}")
 
-# --- 7. A MAGIA FINAL DO CALLNODE ---
     def visit_CallNode(self, node):
         base_name = self._extract_name(node)
         if base_name == 'MOD' and len(node.args) == 2:
@@ -280,10 +269,9 @@ class Compiler:
                 self.emit("pushi 1"); self.emit("sub")
                 self.emit("loadn")
             else:
-                # O SEGREDO RECUPERADO: Passar os argumentos para os parâmetros!
                 params = self.subroutines[base_name]
                 for arg, param_name in zip(node.args, params):
-                    self.visit(arg) # Avalia o argumento (ex: NUM)
+                    self.visit(arg) 
                     param_info = self._info(param_name)
                     self.emit(f"storeg {param_info['addr']}", f"Argumento -> {param_name}")
                 
@@ -296,7 +284,6 @@ class Compiler:
     def visit_SubroutineNode(self, node):
         self.emit(f"\n{node.name}:")
         for s in node.body:
-            # IMPRIME A LABEL NA FUNÇÃO! (Corrige o Grammar Error L20)
             if getattr(s, 'label', None) and s.label not in self.do_loops:
                 self.emit(f"L{s.label}:")
             self.visit(s)

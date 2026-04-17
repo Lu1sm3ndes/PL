@@ -18,17 +18,25 @@ pushi 0
 pushi 0
 // Reserva gp[8] para 'VAL'
 pushi 0
+// Reserva gp[9] para 'CONVRT'
+pushi 0
 // --- INICIALIZACAO DE ARRAYS ---
 
 
 start
-pushs "INTRODUZA UM NUMERO DECIMAL INTEIRO:"
+pushs "INTRODUZA UM NÚMERO DECIMAL INTEIRO:"
 writes
 writeln
 read
 atoi
 // Guardar NUM
 storeg 0
+pushs "NÚMERO: "
+writes
+// Ler NUM
+pushg 0
+writei
+writeln
 pushi 2
 storeg 2
 DOSTART10:
